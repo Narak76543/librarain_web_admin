@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-PXPcgU-z');import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
+import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
 import { _ as _sfc_main$1 } from './DataTable-BR1nB7Yg.mjs';
 import { _ as _sfc_main$2 } from './ConfirmModal-2isBYOOQ.mjs';
 import { ref, mergeProps, unref, withCtx, createVNode, createTextVNode, toDisplayString, useSSRContext } from 'vue';
@@ -218,5 +218,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-PXPcgU-z');
+export { _sfc_main as default };
 //# sourceMappingURL=index-PXPcgU-z.mjs.map

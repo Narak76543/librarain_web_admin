@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/useApi-C-IOE6Or');const useApi = () => {
+const useApi = () => {
   const baseUrl = "http://192.168.0.198:8000";
   const getToken = () => {
     return null;
@@ -70,5 +70,5 @@ globalThis.__timing__.logStart('Load chunks/build/useApi-C-IOE6Or');const useApi
   return { get, post, put, postForm, del };
 };
 
-export { useApi as u };;globalThis.__timing__.logEnd('Load chunks/build/useApi-C-IOE6Or');
+export { useApi as u };
 //# sourceMappingURL=useApi-C-IOE6Or.mjs.map

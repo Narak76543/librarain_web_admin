@@ -1,6 +1,6 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import './timing.js';globalThis.__timing__.logStart('Nitro Start');import { Server as Server$1 } from 'node:http';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { Server as Server$1 } from 'node:http';
 import { Server } from 'node:https';
-import { w as toNodeListener, g as destr, z as useRuntimeConfig, x as trapUnhandledNodeErrors, v as setupGracefulShutdown, y as useNitroApp } from './chunks/_/nitro.mjs';
+import { v as toNodeListener, f as destr, y as useRuntimeConfig, w as trapUnhandledNodeErrors, u as setupGracefulShutdown, x as useNitroApp } from './chunks/_/nitro.mjs';
 import 'node:events';
 import 'node:buffer';
 import 'node:fs';
@@ -34,5 +34,5 @@ trapUnhandledNodeErrors();
 setupGracefulShutdown(listener, nitroApp);
 const nodeServer = {};
 
-export { nodeServer as default };;globalThis.__timing__.logEnd('Nitro Start');
+export { nodeServer as default };
 //# sourceMappingURL=index.mjs.map

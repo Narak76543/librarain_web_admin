@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/StatusBadge-ayQFkwOT');import { computed, mergeProps, useSSRContext } from 'vue';
+import { computed, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrInterpolate } from 'vue/server-renderer';
 
 const _sfc_main = {
@@ -48,5 +48,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as _ };;globalThis.__timing__.logEnd('Load chunks/build/StatusBadge-ayQFkwOT');
+export { _sfc_main as _ };
 //# sourceMappingURL=StatusBadge-ayQFkwOT.mjs.map

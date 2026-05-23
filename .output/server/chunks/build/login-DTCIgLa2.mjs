@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/login-DTCIgLa2');import { ref, mergeProps, unref, useSSRContext } from 'vue';
+import { ref, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderDynamicModel, ssrInterpolate, ssrIncludeBooleanAttr } from 'vue/server-renderer';
 import { Book, Eye, EyeOff, Loader2 } from 'lucide-vue-next';
 
@@ -62,5 +62,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/login-DTCIgLa2');
+export { _sfc_main as default };
 //# sourceMappingURL=login-DTCIgLa2.mjs.map

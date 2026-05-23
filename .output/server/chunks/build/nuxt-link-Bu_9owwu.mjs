@@ -1,5 +1,5 @@
-globalThis.__timing__.logStart('Load chunks/build/nuxt-link-Bu_9owwu');import { defineComponent, shallowRef, h, resolveComponent, computed, unref } from 'vue';
-import { s as parseQuery, o as hasProtocol, r as joinURL, B as withTrailingSlash, C as withoutTrailingSlash } from '../_/nitro.mjs';
+import { defineComponent, shallowRef, h, resolveComponent, computed, unref } from 'vue';
+import { r as parseQuery, n as hasProtocol, q as joinURL, A as withTrailingSlash, B as withoutTrailingSlash } from '../_/nitro.mjs';
 import { c as useRouter, e as encodeRoutePath, r as resolveRouteObject, n as navigateTo, u as useNuxtApp, d as useRuntimeConfig, a as nuxtLinkDefaults } from './server.mjs';
 
 const firstNonUndefined = (...args) => args.find((arg) => arg !== void 0);
@@ -289,5 +289,5 @@ function applyTrailingSlashBehavior(to, trailingSlash) {
   return normalizeFn(to, true);
 }
 
-export { __nuxt_component_0 as _ };;globalThis.__timing__.logEnd('Load chunks/build/nuxt-link-Bu_9owwu');
+export { __nuxt_component_0 as _ };
 //# sourceMappingURL=nuxt-link-Bu_9owwu.mjs.map

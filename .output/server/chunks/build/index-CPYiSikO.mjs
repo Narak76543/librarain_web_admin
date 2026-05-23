@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-CPYiSikO');import { _ as _sfc_main$1 } from './StatusBadge-ayQFkwOT.mjs';
+import { _ as _sfc_main$1 } from './StatusBadge-ayQFkwOT.mjs';
 import { ref, watch, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrRenderList, ssrRenderClass, ssrInterpolate } from 'vue/server-renderer';
 import { Search, X, Loader2, CheckCircle2, XCircle, Mail, Phone, MessageCircle, MapPin } from 'lucide-vue-next';
@@ -305,5 +305,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-CPYiSikO');
+export { _sfc_main as default };
 //# sourceMappingURL=index-CPYiSikO.mjs.map

@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-BzO7bm3y');import { ref, mergeProps, createVNode, resolveDynamicComponent, useSSRContext } from 'vue';
+import { ref, mergeProps, createVNode, resolveDynamicComponent, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderClass, ssrRenderVNode, ssrInterpolate } from 'vue/server-renderer';
 import { Settings, Mail, Cloud, Shield } from 'lucide-vue-next';
 
@@ -52,5 +52,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-BzO7bm3y');
+export { _sfc_main as default };
 //# sourceMappingURL=index-BzO7bm3y.mjs.map

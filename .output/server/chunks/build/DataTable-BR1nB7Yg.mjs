@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/DataTable-BR1nB7Yg');import { computed, mergeProps, useSSRContext } from 'vue';
+import { computed, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderSlot, ssrRenderAttr, ssrIncludeBooleanAttr } from 'vue/server-renderer';
 
 const _sfc_main = {
@@ -61,5 +61,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as _ };;globalThis.__timing__.logEnd('Load chunks/build/DataTable-BR1nB7Yg');
+export { _sfc_main as _ };
 //# sourceMappingURL=DataTable-BR1nB7Yg.mjs.map
