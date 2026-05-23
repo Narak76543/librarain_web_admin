@@ -63,7 +63,8 @@
               v-else 
               v-for="(user, idx) in users" 
               :key="user.id" 
-              class="hover:bg-surface/50 transition-colors group"
+              @click="openPanel(user)"
+              class="hover:bg-surface/50 transition-colors group cursor-pointer"
               :class="{'bg-surface/20': idx % 2 === 1}"
             >
               <td class="px-6 py-4">
@@ -98,7 +99,7 @@
               <td class="px-6 py-4 text-text-secondary">
                 {{ user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—' }}
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4" @click.stop>
                 <div class="flex items-center gap-2">
                   <span
                     class="px-2 py-1 rounded text-xs font-semibold"
@@ -116,14 +117,15 @@
                   </button>
                 </div>
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4" @click.stop>
                 <div class="flex items-center gap-2">
-                  <span
-                    class="px-2 py-1 rounded text-xs font-semibold"
-                    :class="user.is_active ? 'bg-primary-light text-primary' : 'bg-red-100 text-error'"
+                  <button
+                    @click="toggleStatus(user)"
+                    class="px-2 py-1 rounded text-xs font-semibold transition-colors"
+                    :class="user.is_active ? 'bg-primary-light text-primary hover:bg-primary-light/80' : 'bg-red-100 text-error hover:bg-red-200'"
                   >
                     {{ user.is_active ? 'Active' : 'Inactive' }}
-                  </span>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -177,7 +179,9 @@
               <span class="px-2 py-0.5 rounded text-[11px] font-semibold" :class="selectedUser.roles?.[0] === 'ADMIN' ? 'bg-purple-100 text-purple-700' : 'bg-surface text-text-secondary'">
                 {{ selectedUser.roles?.[0] || 'USER' }}
               </span>
-              <StatusBadge :status="selectedUser.is_active" />
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold" :class="selectedUser.is_active ? 'bg-primary-light text-primary' : 'bg-red-100 text-error'">
+                {{ selectedUser.is_active ? 'Active' : 'Inactive' }}
+              </span>
             </div>
           </div>
           
@@ -214,7 +218,7 @@
               </div>
               <div class="flex items-center gap-3 text-sm">
                 <Phone class="w-4 h-4 text-text-secondary" />
-                <span class="text-text-primary">{{ selectedUser.profile?.phone || '—' }}</span>
+                <span class="text-text-primary">{{ selectedUser.phone || '—' }}</span>
               </div>
               <div class="flex items-center gap-3 text-sm">
                 <MessageCircle class="w-4 h-4 text-text-secondary" />
@@ -329,39 +333,126 @@ watch(currentPage, () => {
   fetchUsers()
 })
 
+// const normalizeAdminUser = (record) => {
+//   if (!record?.basic_info && !record?.account_status) return record
+
+//   const basic = record.basic_info || {}
+//   const status = record.account_status || {}
+
+//   return {
+//     id: basic.id || record.user?.id,
+//     full_name: basic.full_name || record.user?.full_name,
+//     email: basic.email || record.user?.email,
+//     phone: basic.phone || record.profile?.phone || record.user?.phone,
+//     is_active: basic.is_active ?? record.user?.is_active,
+//     is_verified: basic.is_verified ?? record.user?.is_verified,
+//     roles: basic.roles || record.user?.roles || [],
+//     created_at: status.created_at,
+//     updated_at: status.updated_at,
+//     failed_login_attempts: status.failed_login_attempts || 0,
+//     locked_until: status.locked_until,
+//     locked_at: status.locked_at,
+//     locked_reason: status.locked_reason,
+//     last_login_at: status.last_login_at,
+//     password_changed_at: status.password_changed_at,
+//     profile: record.profile || {
+//       first_name: basic.first_name,
+//       last_name: basic.last_name,
+//       first_name_local: basic.first_name_local,
+//       last_name_local: basic.last_name_local,
+//       phone: basic.phone,
+//       telegram: basic.telegram,
+//       address: basic.address,
+//       avatar_url: basic.avatar_url,
+//     },
+//     login_logs: record.login_activity || [],
+//     password_recovery: record.password_recovery,
+//     sessions: record.sessions || [],
+//     raw: record,
+//   }
+// }
+// const normalizeAdminUser = (record) => {
+//   if (!record?.basic_info && !record?.account_status) return record
+
+//   const basic = record.basic_info || {}
+//   const status = record.account_status || {}
+
+//   return {
+//     id: basic.id || record.user?.id,
+//     full_name: basic.full_name || record.user?.full_name,
+//     email: basic.email || record.user?.email,
+//     phone: basic.phone || record.profile?.phone || record.user?.phone,
+//     is_active: basic.is_active ?? record.user?.is_active,
+//     is_verified: basic.is_verified ?? record.user?.is_verified,
+//     roles: basic.roles || record.user?.roles || [],
+//     created_at: status.created_at,
+//     updated_at: status.updated_at,
+    
+//     // ⬇️ FIX THE KEY ALIASES HERE TO CATCH FASTAPI'S RESPONSES
+//     failed_login_attempts: status.failed_login_attempts ?? status.failedLoginAttempts ?? 0,
+//     locked_until: status.locked_until || status.lockedUntil || record.data?.lockedUntil || null,
+//     locked_at: status.locked_at || status.lockedAt || null,
+//     locked_reason: status.locked_reason || status.lockedReason || null,
+    
+//     last_login_at: status.last_login_at || status.lastLoginAt,
+//     password_changed_at: status.password_changed_at || status.passwordChangedAt,
+//     profile: record.profile || {
+//       first_name: basic.first_name,
+//       last_name: basic.last_name,
+//       first_name_local: basic.first_name_local,
+//       last_name_local: basic.last_name_local,
+//       phone: basic.phone,
+//       telegram: basic.telegram,
+//       address: basic.address,
+//       avatar_url: basic.avatar_url,
+//     },
+//     login_logs: record.login_activity || [],
+//     password_recovery: record.password_recovery,
+//     sessions: record.sessions || [],
+//     raw: record,
+//   }
+// }
+
 const normalizeAdminUser = (record) => {
-  if (!record?.basic_info && !record?.account_status) return record
+  if (!record) return record
 
   const basic = record.basic_info || {}
   const status = record.account_status || {}
 
   return {
-    id: basic.id || record.user?.id,
-    full_name: basic.full_name || record.user?.full_name,
-    email: basic.email || record.user?.email,
-    phone: basic.phone || record.profile?.phone || record.user?.phone,
-    is_active: basic.is_active ?? record.user?.is_active,
-    is_verified: basic.is_verified ?? record.user?.is_verified,
-    roles: basic.roles || record.user?.roles || [],
-    created_at: status.created_at,
-    updated_at: status.updated_at,
-    failed_login_attempts: status.failed_login_attempts || 0,
-    locked_until: status.locked_until,
-    locked_at: status.locked_at,
-    locked_reason: status.locked_reason,
-    last_login_at: status.last_login_at,
-    password_changed_at: status.password_changed_at,
+    id: basic.id || record.id || record.user?.id,
+    full_name: basic.full_name || record.full_name || record.user?.full_name,
+    email: basic.email || record.email || record.user?.email,
+    phone: basic.phone || record.phone || record.profile?.phone || record.user?.phone,
+    is_active: basic.is_active ?? record.is_active ?? record.user?.is_active,
+    is_verified: basic.is_verified ?? record.is_verified ?? record.user?.is_verified,
+    roles: basic.roles || record.roles || record.user?.roles || [],
+    created_at: status.created_at || record.created_at,
+    updated_at: status.updated_at || record.updated_at,
+    
+    // Fallback checks from root properties down to nested structures
+    failed_login_attempts: record.failed_login_attempts ?? record.failedLoginAttempts ?? status.failed_login_attempts ?? status.failedLoginAttempts ?? 0,
+    locked_until: record.locked_until || record.lockedUntil || status.locked_until || status.lockedUntil || null,
+    locked_at: record.locked_at || record.lockedAt || status.locked_at || status.lockedAt || null,
+    locked_reason: record.locked_reason || record.lockedReason || status.locked_reason || status.lockedReason || null,
+    
+    // Add boolean properties for lock status that might be sent by backend
+    is_locked: record.is_locked ?? record.lock_attempt ?? false,
+    lock_attempt: record.lock_attempt ?? record.is_locked ?? false,
+    
+    last_login_at: record.last_login_at || record.lastLoginAt || status.last_login_at || status.lastLoginAt,
+    password_changed_at: record.password_changed_at || record.passwordChangedAt || status.password_changed_at || status.passwordChangedAt,
     profile: record.profile || {
-      first_name: basic.first_name,
-      last_name: basic.last_name,
-      first_name_local: basic.first_name_local,
-      last_name_local: basic.last_name_local,
-      phone: basic.phone,
-      telegram: basic.telegram,
-      address: basic.address,
-      avatar_url: basic.avatar_url,
+      first_name: basic.first_name || record.first_name,
+      last_name: basic.last_name || record.last_name,
+      first_name_local: basic.first_name_local || record.first_name_local,
+      last_name_local: basic.last_name_local || record.last_name_local,
+      phone: basic.phone || record.phone,
+      telegram: basic.telegram || record.telegram,
+      address: basic.address || record.address,
+      avatar_url: basic.avatar_url || record.avatar_url,
     },
-    login_logs: record.login_activity || [],
+    login_logs: record.login_activity || record.login_logs || [],
     password_recovery: record.password_recovery,
     sessions: record.sessions || [],
     raw: record,
@@ -369,7 +460,35 @@ const normalizeAdminUser = (record) => {
 }
 
 const isLockedUser = (user) => {
-  return Boolean(user?.locked_until) || (user?.failed_login_attempts || 0) > 0
+  if (!user) return false
+  
+  // 1. Check direct boolean flags
+  if (user.is_locked === true || user.lock_attempt === true || user.raw?.is_locked === true || user.raw?.lock_attempt === true) {
+    return true
+  }
+  
+  // 2. Check for any variation of locked_until timestamps
+  const lockedUntilVal = user.locked_until || 
+                         user.lockedUntil || 
+                         user.account_status?.locked_until || 
+                         user.account_status?.lockedUntil ||
+                         user.raw?.account_status?.lockedUntil
+                         
+  if (lockedUntilVal) {
+    const lockDate = new Date(lockedUntilVal)
+    // If the lock time is in the future, the user is definitely locked
+    if (lockDate > new Date()) return true
+  }
+
+  // 3. Fallback check for active failed login attempt counters
+  const failedAttempts = user.failed_login_attempts ?? 
+                         user.failedLoginAttempts ?? 
+                         user.account_status?.failed_login_attempts ?? 
+                         user.account_status?.failedLoginAttempts ?? 
+                         user.raw?.failed_login_attempts ??
+                         0
+
+  return failedAttempts > 0
 }
 
 const getUserInitials = (user) => {
@@ -415,15 +534,17 @@ const fetchUsers = async () => {
     })
     
     if (res && res.ok) {
-      users.value = res.data.users.map(normalizeAdminUser)
-      total.value = res.data.total
+      // Handles both dynamic paginated backend structures or raw arrays safely
+      const rawUsers = Array.isArray(res.data) ? res.data : (res.data?.users || [])
+      users.value = rawUsers.map(normalizeAdminUser)
+      total.value = res.data?.total || rawUsers.length
     } else {
       if (res?.status === 401 || res?.status === 403) {
         handleApiError(res)
       }
     }
   } catch (err) {
-    handleApiError(err.data || err)
+    handleApiError(err?.data || err)
   } finally {
     isLoading.value = false
   }
@@ -438,12 +559,13 @@ const openPanel = async (user) => {
     const { getUserDetail } = useAdminUsers()
     const res = await getUserDetail(user.id)
     if (res && res.ok) {
+      // If endpoint returns a detailed nested single entity directly
       selectedUser.value = normalizeAdminUser(res.data)
     } else {
       handleApiError(res)
     }
   } catch (err) {
-    handleApiError(err.data || err)
+    handleApiError(err?.data || err)
   } finally {
     isLoadingDetail.value = false
   }
@@ -467,7 +589,7 @@ const toggleStatus = async (user) => {
       handleApiError(res)
     }
   } catch (err) {
-    handleApiError(err.data || err)
+    handleApiError(err?.data || err)
   }
 }
 
@@ -477,10 +599,12 @@ const handleResetAttempt = async (user) => {
     const res = await resetLoginAttempt(user.id)
     if (res && res.ok) {
       const updatedUser = normalizeAdminUser(res.data)
-      user.failed_login_attempts = updatedUser.failed_login_attempts
+      user.failed_login_attempts = updatedUser.failed_login_attempts || 0
       user.locked_until = updatedUser.locked_until
       user.locked_at = updatedUser.locked_at
       user.locked_reason = updatedUser.locked_reason
+      user.is_locked = updatedUser.is_locked || false
+      user.lock_attempt = updatedUser.lock_attempt || false
       
       const idx = users.value.findIndex(u => u.id === user.id)
       if (idx !== -1) {
@@ -495,7 +619,7 @@ const handleResetAttempt = async (user) => {
       handleApiError(res)
     }
   } catch (err) {
-    handleApiError(err.data || err)
+    handleApiError(err?.data || err)
   }
 }
 
@@ -511,14 +635,14 @@ const handleForceLogout = async (user) => {
       }
       const idx = users.value.findIndex(u => u.id === user.id)
       if (idx !== -1) {
-        users.value[idx].sessions = [] // Assuming we added it to users state
+        users.value[idx].sessions = [] 
       }
       alert('User forcefully logged out of all active sessions.')
     } else {
       handleApiError(res)
     }
   } catch (err) {
-    handleApiError(err.data || err)
+    handleApiError(err?.data || err)
   }
 }
 
