@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-BmuH3-JK');import { _ as _sfc_main$1 } from './StatusBadge-ayQFkwOT.mjs';
+import { _ as _sfc_main$1 } from './StatusBadge-ayQFkwOT.mjs';
 import { _ as _sfc_main$2 } from './ConfirmModal-2isBYOOQ.mjs';
 import { ref, reactive, computed, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderList, ssrInterpolate, ssrIncludeBooleanAttr, ssrLooseContain } from 'vue/server-renderer';
@@ -173,5 +173,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-BmuH3-JK');
+export { _sfc_main as default };
 //# sourceMappingURL=index-BmuH3-JK.mjs.map

@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-CeIAcPag');import { computed, mergeProps, unref, withCtx, createTextVNode, toDisplayString, createVNode, resolveDynamicComponent, useSSRContext } from 'vue';
+import { computed, mergeProps, unref, withCtx, createTextVNode, toDisplayString, createVNode, resolveDynamicComponent, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrRenderAttr, ssrInterpolate, ssrRenderStyle, ssrRenderClass, ssrRenderVNode } from 'vue/server-renderer';
 import { BookOpen, ShoppingBag, Users, DollarSign } from 'lucide-vue-next';
 import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
@@ -207,5 +207,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-CeIAcPag');
+export { _sfc_main as default };
 //# sourceMappingURL=index-CeIAcPag.mjs.map

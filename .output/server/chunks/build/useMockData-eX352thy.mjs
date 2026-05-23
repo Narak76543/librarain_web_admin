@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/useMockData-eX352thy');const useMockData = () => {
+const useMockData = () => {
   const stats = {
     totalBooks: 243,
     totalOrders: 89,
@@ -163,5 +163,5 @@ globalThis.__timing__.logStart('Load chunks/build/useMockData-eX352thy');const u
   return { stats, books, categories, orders, users, chartData };
 };
 
-export { useMockData as u };;globalThis.__timing__.logEnd('Load chunks/build/useMockData-eX352thy');
+export { useMockData as u };
 //# sourceMappingURL=useMockData-eX352thy.mjs.map

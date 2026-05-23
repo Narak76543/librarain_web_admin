@@ -1,7 +1,7 @@
 import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, inject, toRef, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, defineComponent, computed, unref, h, Suspense, nextTick, mergeProps, provide, ref, Fragment, withCtx, createVNode, useSSRContext, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, createApp } from "vue";
 import { $fetch as $fetch$1 } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/ofetch/dist/node.mjs";
 import { baseURL } from "#internal/nuxt/paths";
-import { createHooks, createDebugger } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/hookable/dist/index.mjs";
+import { createHooks } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/hookable/dist/index.mjs";
 import { getContext, executeAsync } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unctx/dist/index.mjs";
 import { sanitizeStatusCode, createError as createError$1 } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/h3/dist/index.mjs";
 import { START_LOCATION, createMemoryHistory, createRouter, useRoute as useRoute$1, RouterView } from "vue-router";
@@ -829,13 +829,6 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     return { provide: { router } };
   }
 });
-const debug_hooks_hyXe6laRLyyi6S6XoqeItfe9HTFGNswlS09LT9GQbmQ = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:debug:hooks",
-  enforce: "pre",
-  setup(nuxtApp) {
-    createDebugger(nuxtApp.hooks, { tag: "nuxt-app" });
-  }
-});
 function definePayloadReducer(name, reduce) {
   {
     useNuxtApp().ssrContext["~payloadReducers"][name] = reduce;
@@ -864,7 +857,6 @@ const components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4 = /* @__PURE
 const plugins = [
   unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU,
   plugin,
-  debug_hooks_hyXe6laRLyyi6S6XoqeItfe9HTFGNswlS09LT9GQbmQ,
   revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms,
   components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4
 ];
@@ -1151,8 +1143,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import("./_nuxt/error-404-ZAaNcCnN.js"));
-    const _Error = defineAsyncComponent(() => import("./_nuxt/error-500-5TgelUnF.js"));
+    const _Error404 = defineAsyncComponent(() => import("./_nuxt/error-404-CH7NN0np.js"));
+    const _Error = defineAsyncComponent(() => import("./_nuxt/error-500-jX2RgRba.js"));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));

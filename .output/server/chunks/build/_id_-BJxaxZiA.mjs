@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/_id_-BJxaxZiA');import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
+import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
 import { computed, mergeProps, withCtx, unref, createVNode, createTextVNode, ref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderAttr, ssrRenderList, ssrIncludeBooleanAttr } from 'vue/server-renderer';
 import { ArrowLeft, BookImage } from 'lucide-vue-next';
@@ -113,5 +113,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/_id_-BJxaxZiA');
+export { _sfc_main as default };
 //# sourceMappingURL=_id_-BJxaxZiA.mjs.map

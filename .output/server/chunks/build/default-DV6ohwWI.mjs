@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/default-DV6ohwWI');import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
+import { _ as __nuxt_component_0 } from './nuxt-link-Bu_9owwu.mjs';
 import { computed, mergeProps, ref, unref, withCtx, createVNode, resolveDynamicComponent, openBlock, createBlock, createTextVNode, toDisplayString, useSSRContext, defineComponent, createElementBlock, shallowRef, getCurrentInstance, provide, cloneVNode, h } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrRenderList, ssrRenderVNode, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
 import { useRoute as useRoute$1, useRouter } from 'vue-router';
@@ -204,5 +204,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/default-DV6ohwWI');
+export { _sfc_main as default };
 //# sourceMappingURL=default-DV6ohwWI.mjs.map

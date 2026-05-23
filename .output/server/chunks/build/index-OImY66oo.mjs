@@ -1,4 +1,4 @@
-globalThis.__timing__.logStart('Load chunks/build/index-OImY66oo');import { _ as _sfc_main$1 } from './StatusBadge-ayQFkwOT.mjs';
+import { _ as _sfc_main$1 } from './StatusBadge-ayQFkwOT.mjs';
 import { ref, mergeProps, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual } from 'vue/server-renderer';
 import { Search, ChevronDown } from 'lucide-vue-next';
@@ -45,5 +45,5 @@ _sfc_main.setup = (props, ctx) => {
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
-export { _sfc_main as default };;globalThis.__timing__.logEnd('Load chunks/build/index-OImY66oo');
+export { _sfc_main as default };
 //# sourceMappingURL=index-OImY66oo.mjs.map
