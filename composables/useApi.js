@@ -1,0 +1,115 @@
+export const useApi = () => {
+  const baseUrl = 'http://192.168.0.198:8000'
+
+  const getToken = () => {
+    if (process.client) return localStorage.getItem('access_token')
+    return null
+  }
+
+  const getRefreshToken = () => {
+    if (process.client) return localStorage.getItem('refresh_token')
+    return null
+  }
+
+  const clearAuth = () => {
+    if (!process.client) return
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+    localStorage.removeItem('user')
+  }
+
+  const refreshAccessToken = async () => {
+    const refreshToken = getRefreshToken()
+    if (!refreshToken) return false
+
+    try {
+      const res = await $fetch(`${baseUrl}/api/v1/auth/refresh-token`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: { refreshToken },
+      })
+
+      if (!res?.ok || !res?.data?.accessToken) return false
+
+      localStorage.setItem('access_token', res.data.accessToken)
+      if (res.data.refreshToken) {
+        localStorage.setItem('refresh_token', res.data.refreshToken)
+      }
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  const authHeaders = () => ({
+    Authorization: `Bearer ${getToken()}`,
+    'Content-Type': 'application/json',
+  })
+
+  const request = async (path, options, canRetry = true) => {
+    try {
+      return await $fetch(`${baseUrl}${path}`, options)
+    } catch (error) {
+      const status = error?.status || error?.statusCode || error?.response?.status
+      if (status !== 401 || !canRetry) throw error
+
+      const didRefresh = await refreshAccessToken()
+      if (!didRefresh) {
+        clearAuth()
+        throw error
+      }
+
+      return await request(
+        path,
+        {
+          ...options,
+          headers: {
+            ...options.headers,
+            Authorization: `Bearer ${getToken()}`,
+          },
+        },
+        false,
+      )
+    }
+  }
+
+  const get = async (path) => {
+    return await request(path, {
+      method: 'GET',
+      headers: authHeaders(),
+    })
+  }
+
+  const post = async (path, body) => {
+    return await request(path, {
+      method: 'POST',
+      headers: authHeaders(),
+      body,
+    })
+  }
+
+  const put = async (path, body) => {
+    return await request(path, {
+      method: 'PUT',
+      headers: authHeaders(),
+      body,
+    })
+  }
+
+  const postForm = async (path, formData) => {
+    return await request(path, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${getToken()}` },
+      body: formData,
+    })
+  }
+
+  const del = async (path) => {
+    return await request(path, {
+      method: 'DELETE',
+      headers: authHeaders(),
+    })
+  }
+
+  return { get, post, put, postForm, del }
+}
