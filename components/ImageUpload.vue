@@ -15,8 +15,8 @@
       @change="handleFileSelect"
     />
     
-    <template v-if="previewUrl">
-      <img :src="previewUrl" class="w-full h-full object-contain" alt="Preview" />
+    <template v-if="previewUrl || initialUrl">
+      <img :src="previewUrl || initialUrl" class="w-full h-full object-contain" alt="Preview" />
       <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
         <span class="text-white font-medium text-sm">Change Image</span>
       </div>
@@ -33,6 +33,10 @@
 <script setup>
 import { ref } from 'vue'
 import { BookImage } from 'lucide-vue-next'
+
+const props = defineProps({
+  initialUrl: { type: String, default: null }
+})
 
 const emit = defineEmits(['file-selected'])
 const fileInput = ref(null)

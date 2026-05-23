@@ -4,15 +4,15 @@
       <div class="flex items-center gap-4">
         <div class="relative">
           <Search class="w-4 h-4 text-text-secondary absolute left-3 top-1/2 -translate-y-1/2" />
-          <input type="text" placeholder="Search books..." class="pl-9 w-64 bg-white" />
+          <input type="text" v-model="searchQuery" placeholder="Search books..." class="pl-9 w-64 bg-white" />
         </div>
         
-        <select class="bg-white min-w-[150px]">
+        <select v-model="selectedCategory" class="bg-white min-w-[150px]">
           <option value="">All Categories</option>
-          <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+          <option v-for="cat in categories" :key="cat.id" :value="cat.slug">{{ cat.name }}</option>
         </select>
         
-        <select class="bg-white min-w-[120px]">
+        <select v-model="selectedStatus" class="bg-white min-w-[120px]">
           <option value="">All Status</option>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
@@ -29,9 +29,10 @@
       <DataTable 
         :columns="columns" 
         :rows="books" 
-        :total="243"
-        :page="1"
-        :perPage="10"
+        :total="totalBooks"
+        :page="currentPage"
+        :perPage="perPage"
+        @page-change="onPageChange"
       >
         <template #book="{ row }">
           <div class="flex items-center gap-4">
@@ -60,7 +61,7 @@
         
         <template #status="{ row }">
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" class="sr-only peer" :checked="row.status">
+            <input type="checkbox" class="sr-only peer" :checked="row.status" @change="toggleStatus(row)">
             <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
           </label>
         </template>
@@ -90,10 +91,75 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { Search, Plus, Star, Edit2, Trash2 } from 'lucide-vue-next'
 
-const { books, categories } = useMockData()
+const { getBooks, updateBook, deleteBook } = useBooks()
+const { getCategories } = useCategories()
+
+const books = ref([])
+const categories = ref([])
+const totalBooks = ref(0)
+const currentPage = ref(1)
+const perPage = ref(10)
+
+const searchQuery = ref('')
+const selectedCategory = ref('')
+const selectedStatus = ref('')
+
+const fetchCategories = async () => {
+  const res = await getCategories()
+  if (res && res.ok) {
+    categories.value = res.data
+  }
+}
+
+const fetchBooks = async () => {
+  const offset = (currentPage.value - 1) * perPage.value
+  const res = await getBooks({
+    search: searchQuery.value,
+    category: selectedCategory.value,
+    limit: perPage.value,
+    offset: offset,
+  })
+  if (res && res.ok) {
+    books.value = res.data.books.map(b => ({
+      ...b,
+      cover: b.cover_url || 'https://via.placeholder.com/48x64',
+      category: b.category?.name || 'Uncategorized',
+      price: Number(b.price) || 0,
+      stock: Number(b.stock) || 0,
+      rating: Number(b.rating_average) || 0,
+      status: b.is_active
+    }))
+    totalBooks.value = res.data.total
+  }
+}
+
+onMounted(() => {
+  fetchCategories()
+  fetchBooks()
+})
+
+watch([searchQuery, selectedCategory, selectedStatus], () => {
+  currentPage.value = 1
+  fetchBooks()
+})
+
+const onPageChange = (page) => {
+  currentPage.value = page
+  fetchBooks()
+}
+
+const toggleStatus = async (row) => {
+  const newStatus = !row.status
+  const res = await updateBook(row.id, { is_active: newStatus })
+  if (res && res.ok) {
+    row.status = newStatus
+  } else {
+    fetchBooks()
+  }
+}
 
 const columns = [
   { key: 'book', label: 'Book' },
@@ -113,8 +179,11 @@ const confirmDelete = (book) => {
   showDeleteModal.value = true
 }
 
-const handleDelete = () => {
-  // Mock delete
+const handleDelete = async () => {
+  if (bookToDelete.value) {
+    await deleteBook(bookToDelete.value.id)
+    fetchBooks()
+  }
   showDeleteModal.value = false
   bookToDelete.value = null
 }

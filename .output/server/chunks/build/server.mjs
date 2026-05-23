@@ -455,7 +455,7 @@ const _routes = [
   {
     name: "users",
     path: "/users",
-    component: () => import('./index-CPYiSikO.mjs')
+    component: () => import('./index-r9mmvbE0.mjs')
   },
   {
     name: "orders",
@@ -470,7 +470,7 @@ const _routes = [
   {
     name: "categories",
     path: "/categories",
-    component: () => import('./index-BmuH3-JK.mjs')
+    component: () => import('./index-C0xcub39.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
