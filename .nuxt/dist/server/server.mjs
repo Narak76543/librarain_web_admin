@@ -441,12 +441,12 @@ const _routes = [
   {
     name: "books",
     path: "/books",
-    component: () => import("./_nuxt/index-DsE4hcra.js")
+    component: () => import("./_nuxt/index-BCTGmD7r.js")
   },
   {
     name: "users",
     path: "/users",
-    component: () => import("./_nuxt/index-dWnOvJuL.js")
+    component: () => import("./_nuxt/index-CmA8adD-.js")
   },
   {
     name: "orders",
@@ -461,7 +461,7 @@ const _routes = [
   {
     name: "categories",
     path: "/categories",
-    component: () => import("./_nuxt/index-BiRZEb3l.js")
+    component: () => import("./_nuxt/index-DkOAgFcD.js")
   }
 ];
 const _wrapInTransition = (props, children) => {

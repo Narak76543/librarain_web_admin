@@ -536,8 +536,45 @@ const fetchUsers = async () => {
     if (res && res.ok) {
       // Handles both dynamic paginated backend structures or raw arrays safely
       const rawUsers = Array.isArray(res.data) ? res.data : (res.data?.users || [])
-      users.value = rawUsers.map(normalizeAdminUser)
-      total.value = res.data?.total || rawUsers.length
+      
+      let filteredUsers = rawUsers
+      
+      // Local Search Filter
+      if (searchQuery.value) {
+        const q = searchQuery.value.toLowerCase()
+        filteredUsers = filteredUsers.filter(u => 
+          (u.full_name && u.full_name.toLowerCase().includes(q)) ||
+          (u.email && u.email.toLowerCase().includes(q))
+        )
+      }
+      
+      // Local Role Filter
+      if (roleFilter.value) {
+        filteredUsers = filteredUsers.filter(u => {
+          const norm = normalizeAdminUser(u)
+          return norm.roles?.includes(roleFilter.value)
+        })
+      }
+      
+      // Local Status Filter
+      if (statusFilter.value) {
+        filteredUsers = filteredUsers.filter(u => {
+          const norm = normalizeAdminUser(u)
+          if (statusFilter.value === 'active') return norm.is_active
+          if (statusFilter.value === 'inactive') return !norm.is_active
+          if (statusFilter.value === 'locked') return isLockedUser(norm)
+          if (statusFilter.value === 'unlocked') return !isLockedUser(norm)
+          return true
+        })
+      }
+      
+      total.value = filteredUsers.length
+      
+      // Local Pagination
+      const startIndex = (currentPage.value - 1) * perPage
+      const endIndex = startIndex + perPage
+      
+      users.value = filteredUsers.slice(startIndex, endIndex).map(normalizeAdminUser)
     } else {
       if (res?.status === 401 || res?.status === 403) {
         handleApiError(res)

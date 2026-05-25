@@ -112,11 +112,31 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
-const { stats, chartData, orders, categories } = useMockData()
+const { getBooks } = useBooks()
+const { getOrders } = useOrders()
+const { getAllUsers } = useAdminUsers()
+const { getCategories } = useCategories()
+const api = useApi()
 
-const recentOrders = computed(() => orders.slice(0, 5))
+const stats = ref({
+  totalBooks: 0,
+  totalOrders: 0,
+  totalUsers: 0,
+  totalRevenue: 0
+})
+
+const chartData = ref({
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  orders: [0, 0, 0, 0, 0, 0, 0]
+})
+
+const orders = ref([])
+const categories = ref([])
+const isLoading = ref(true)
+
+const recentOrders = computed(() => orders.value.slice(0, 5))
 
 const orderColumns = [
   { key: 'id', label: 'Order ID' },
@@ -127,12 +147,12 @@ const orderColumns = [
 ]
 
 // Line chart points calculation
-const maxOrder = Math.max(...chartData.orders)
+const maxOrder = computed(() => Math.max(1, ...chartData.value.orders))
 const points = computed(() => {
-  return chartData.orders.map((val, idx) => {
+  return chartData.value.orders.map((val, idx) => {
     return {
       x: idx * 110 + 20,
-      y: 200 - (val / maxOrder) * 180 + 10
+      y: 200 - (val / maxOrder.value) * 180 + 10
     }
   })
 })
@@ -144,10 +164,11 @@ const linePoints = computed(() => {
 // Donut chart calculation
 const categoryColors = ['#059669', '#3B82F6', '#F59E0B', '#8B5CF6', '#EC4899', '#6B7280']
 const donutSlices = computed(() => {
-  let total = categories.reduce((sum, cat) => sum + cat.books, 0)
+  let total = categories.value.reduce((sum, cat) => sum + cat.books, 0)
+  if (total === 0) total = 1
   let currentAngle = 0
   
-  return categories.map((cat, idx) => {
+  return categories.value.map((cat, idx) => {
     const angle = (cat.books / total) * Math.PI * 2
     const startX = Math.sin(currentAngle) * 100
     const startY = -Math.cos(currentAngle) * 100
@@ -164,5 +185,58 @@ const donutSlices = computed(() => {
       path: `M 0 0 L ${startX} ${startY} A 100 100 0 ${largeArcFlag} 1 ${endX} ${endY} Z`
     }
   })
+})
+
+const fetchDashboardData = async () => {
+  isLoading.value = true
+  try {
+    const res = await api.get('/api/v1/admin/dashboard')
+    
+    if (res && res.ok && res.data) {
+      const data = res.data
+      
+      // Stats
+      stats.value.totalBooks = data.stats.total_books
+      stats.value.totalOrders = data.stats.total_orders
+      stats.value.totalUsers = data.stats.total_users
+      stats.value.totalRevenue = parseFloat(data.stats.total_revenue || 0)
+      
+      // Recent Orders
+      orders.value = (data.recent_orders || []).map(o => ({
+        id: o.id,
+        customer: o.customer,
+        date: o.created_at,
+        total: parseFloat(o.total || 0),
+        status: o.status ? (o.status.charAt(0).toUpperCase() + o.status.slice(1)) : 'Pending'
+      }))
+      
+      // Categories
+      categories.value = (data.books_by_category || []).map(c => ({
+        name: c.name,
+        books: c.count
+      }))
+      
+      // Chart Data
+      const dayLabels = []
+      const dayCounts = []
+      ;(data.orders_chart || []).forEach(item => {
+        dayLabels.push(item.date)
+        dayCounts.push(item.count)
+      })
+      
+      chartData.value = {
+        labels: dayLabels,
+        orders: dayCounts
+      }
+    }
+  } catch (e) {
+    console.error('Failed to fetch dashboard data', e)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchDashboardData()
 })
 </script>

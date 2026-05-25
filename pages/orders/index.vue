@@ -8,7 +8,7 @@
           <span class="text-text-secondary text-sm pb-0.5">{{ totalOrders }} orders total</span>
         </div>
       </div>
-      <button class="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-text-primary hover:bg-surface transition-colors font-medium text-sm shadow-sm">
+      <button @click="exportCSV" class="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-text-primary hover:bg-surface transition-colors font-medium text-sm shadow-sm">
         <Download class="w-4 h-4" />
         Export CSV
       </button>
@@ -295,6 +295,59 @@ const fetchOrders = async () => {
     console.error("Failed to fetch orders:", err)
   } finally {
     isLoading.value = false
+  }
+}
+
+const exportCSV = async () => {
+  try {
+    const res = await getOrders({
+      search: searchQuery.value,
+      status: statusFilter.value,
+      fromDate: fromDate.value,
+      toDate: toDate.value,
+      limit: 10000,
+      offset: 0,
+    })
+    
+    let rawOrders = res?.data?.orders || []
+    
+    const headers = ['Order ID', 'Customer Name', 'Email', 'Date', 'Items Count', 'Total', 'Status']
+    const rows = rawOrders.map(o => {
+      const customerName = o.customer?.full_name || o.user?.name || o.customer_name || 'Unknown'
+      const email = o.customer?.email || o.user?.email || o.email || ''
+      const date = o.created_at ? new Date(o.created_at).toLocaleDateString() : 'N/A'
+      const itemsCount = o.items_count || o.items?.length || o.books || 0
+      const total = o.total || o.total_amount || 0
+      const status = o.status || 'Pending'
+      
+      return [
+        o.id,
+        customerName.replace(/"/g, '""'),
+        email.replace(/"/g, '""'),
+        date,
+        itemsCount,
+        total,
+        status
+      ]
+    })
+    
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(r => r.map(field => `"${field}"`).join(','))
+    ].join('\n')
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    const url = URL.createObjectURL(blob)
+    link.setAttribute('href', url)
+    link.setAttribute('download', `orders_export_${new Date().toISOString().split('T')[0]}.csv`)
+    link.style.visibility = 'hidden'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } catch (error) {
+    console.error("Export failed", error)
+    alert("Failed to export CSV")
   }
 }
 
