@@ -1,12 +1,12 @@
 import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, inject, toRef, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, defineComponent, computed, unref, h, Suspense, nextTick, mergeProps, provide, ref, Fragment, withCtx, createVNode, useSSRContext, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, createApp } from "vue";
-import { $fetch as $fetch$1 } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/ofetch/dist/node.mjs";
+import { $fetch as $fetch$1 } from "/Users/macme/Desktop/librarain_web_admin/node_modules/ofetch/dist/node.mjs";
 import { baseURL } from "#internal/nuxt/paths";
-import { createHooks } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/hookable/dist/index.mjs";
-import { getContext, executeAsync } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unctx/dist/index.mjs";
-import { sanitizeStatusCode, createError as createError$1 } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/h3/dist/index.mjs";
+import { createHooks } from "/Users/macme/Desktop/librarain_web_admin/node_modules/hookable/dist/index.mjs";
+import { getContext, executeAsync } from "/Users/macme/Desktop/librarain_web_admin/node_modules/unctx/dist/index.mjs";
+import { sanitizeStatusCode, createError as createError$1 } from "/Users/macme/Desktop/librarain_web_admin/node_modules/h3/dist/index.mjs";
 import { START_LOCATION, createMemoryHistory, createRouter, useRoute as useRoute$1, RouterView } from "vue-router";
-import { defu } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/defu/dist/defu.mjs";
-import { hasProtocol, joinURL, withQuery, parseURL, encodePath, decodePath, isScriptProtocol } from "D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/ufo/dist/index.mjs";
+import { defu } from "/Users/macme/Desktop/librarain_web_admin/node_modules/defu/dist/defu.mjs";
+import { hasProtocol, joinURL, withQuery, parseURL, encodePath, decodePath, isScriptProtocol } from "/Users/macme/Desktop/librarain_web_admin/node_modules/ufo/dist/index.mjs";
 import { ssrRenderComponent, ssrRenderSuspense, ssrRenderVNode } from "vue/server-renderer";
 if (!globalThis.$fetch) {
   globalThis.$fetch = $fetch$1.create({
@@ -425,28 +425,28 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import("./_nuxt/index-CeIAcPag.js")
+    component: () => import("./_nuxt/index-D8BI6Er5.js")
   },
   {
     name: "login",
     path: "/login",
     meta: __nuxt_page_meta || {},
-    component: () => import("./_nuxt/login-DTCIgLa2.js")
+    component: () => import("./_nuxt/login-CylCLV7B.js")
   },
   {
     name: "books-id",
     path: "/books/:id()",
-    component: () => import("./_nuxt/_id_-BJxaxZiA.js")
+    component: () => import("./_nuxt/_id_-g0lL7GAV.js")
   },
   {
     name: "books",
     path: "/books",
-    component: () => import("./_nuxt/index-PXPcgU-z.js")
+    component: () => import("./_nuxt/index-BxbVVT9n.js")
   },
   {
     name: "users",
     path: "/users",
-    component: () => import("./_nuxt/index-r9mmvbE0.js")
+    component: () => import("./_nuxt/index-B74wCewb.js")
   },
   {
     name: "orders",
@@ -461,7 +461,7 @@ const _routes = [
   {
     name: "categories",
     path: "/categories",
-    component: () => import("./_nuxt/index-C0xcub39.js")
+    component: () => import("./_nuxt/index-CJ1o5oRJ.js")
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -861,7 +861,7 @@ const plugins = [
   components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import("./_nuxt/default-DV6ohwWI.js").then((m) => m.default || m))
+  default: defineAsyncComponent(() => import("./_nuxt/default-iuIIpQuk.js").then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({
@@ -1143,8 +1143,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import("./_nuxt/error-404-CH7NN0np.js"));
-    const _Error = defineAsyncComponent(() => import("./_nuxt/error-500-jX2RgRba.js"));
+    const _Error404 = defineAsyncComponent(() => import("./_nuxt/error-404-BWPYXi85.js"));
+    const _Error = defineAsyncComponent(() => import("./_nuxt/error-500-DoBTaSWm.js"));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
