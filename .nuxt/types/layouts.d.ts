@@ -6,7 +6,7 @@ type ComponentProps<T> = T extends new(...args: any) => { $props: infer P } ? No
 
 declare module 'nuxt/app' {
   interface NuxtLayouts {
-    default: ComponentProps<typeof import("D:/mobile_assignment/web_s2_nuxt/bookstore-admin/layouts/default.vue").default>,
+    default: ComponentProps<typeof import("/Users/san/Documents/Norton/Software_Development/year3/semester2/advance mobile app/assignment/librarain_web_admin/layouts/default.vue").default>,
 }
   export type LayoutKey = keyof NuxtLayouts extends never ? string : keyof NuxtLayouts
   interface PageMeta {

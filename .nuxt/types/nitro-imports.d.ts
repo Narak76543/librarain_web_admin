@@ -145,5 +145,5 @@ export { getRouteRules } from 'nitropack/runtime/internal/route-rules';
 export { useEvent } from 'nitropack/runtime/internal/context';
 export { defineTask, runTask } from 'nitropack/runtime/internal/task';
 export { defineNitroErrorHandler } from 'nitropack/runtime/internal/error/utils';
-export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from 'D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths';
-export { defineAppConfig } from 'D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/nitro-server/dist/runtime/utils/config';
+export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from '/Users/san/Documents/Norton/Software_Development/year3/semester2/advance mobile app/assignment/librarain_web_admin/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths';
+export { defineAppConfig } from '/Users/san/Documents/Norton/Software_Development/year3/semester2/advance mobile app/assignment/librarain_web_admin/node_modules/@nuxt/nitro-server/dist/runtime/utils/config';

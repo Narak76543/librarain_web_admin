@@ -1,5 +1,5 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, inject, getCurrentInstance, defineAsyncComponent, defineComponent, h, computed, unref, shallowRef, provide, shallowReactive, ref, Suspense, Fragment, createApp, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, reactive, effectScope, mergeProps, getCurrentScope, toRef, withCtx, nextTick, isReadonly, useSSRContext, isRef, isShallow, isReactive, toRaw } from 'vue';
-import { s as parseURL, g as encodePath, d as decodePath, n as hasProtocol, o as isScriptProtocol, q as joinURL, z as withQuery, t as sanitizeStatusCode, i as getContext, $ as $fetch, e as defu, a as createHooks, c as createError$1, h as executeAsync } from '../_/nitro.mjs';
+import { s as parseURL, f as encodePath, d as decodePath, m as hasProtocol, n as isScriptProtocol, p as joinURL, w as withQuery, t as sanitizeStatusCode, h as getContext, $ as $fetch, e as defu, a as createHooks, c as createError$1, g as executeAsync } from '../nitro/nitro.mjs';
 import { b as baseURL } from '../routes/renderer.mjs';
 import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'vue/server-renderer';
@@ -434,28 +434,28 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-CeIAcPag.mjs')
+    component: () => import('./index-BTOczRww.mjs')
   },
   {
     name: "login",
     path: "/login",
     meta: __nuxt_page_meta || {},
-    component: () => import('./login-DTCIgLa2.mjs')
+    component: () => import('./login-B6CSU-ZG.mjs')
   },
   {
     name: "books-id",
     path: "/books/:id()",
-    component: () => import('./_id_-BJxaxZiA.mjs')
+    component: () => import('./_id_-Bh48pNTK.mjs')
   },
   {
     name: "books",
     path: "/books",
-    component: () => import('./index-PXPcgU-z.mjs')
+    component: () => import('./index-1zzSQX8K.mjs')
   },
   {
     name: "users",
     path: "/users",
-    component: () => import('./index-r9mmvbE0.mjs')
+    component: () => import('./index-Bwcfx_IE.mjs')
   },
   {
     name: "orders",
@@ -470,7 +470,7 @@ const _routes = [
   {
     name: "categories",
     path: "/categories",
-    component: () => import('./index-C0xcub39.mjs')
+    component: () => import('./index-BEwAhOhW.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -870,7 +870,7 @@ const plugins = [
   components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import('./default-DV6ohwWI.mjs').then((m) => m.default || m))
+  default: defineAsyncComponent(() => import('./default-DpnUWFZg.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({
@@ -1152,8 +1152,8 @@ const _sfc_main$1 = {
     const statusText = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-CH7NN0np.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-jX2RgRba.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-B2_eGwMj.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-v9Ezqlg_.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ status: unref(status), statusText: unref(statusText), statusCode: unref(status), statusMessage: unref(statusText), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
