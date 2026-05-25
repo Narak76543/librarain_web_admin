@@ -36,4 +36,5 @@ export { useAuth } from '../composables/useAuth';
 export { useBooks } from '../composables/useBooks';
 export { useCategories } from '../composables/useCategories';
 export { useMockData } from '../composables/useMockData';
+export { useOrders } from '../composables/useOrders';
 export { useUserProfile } from '../composables/useUserProfile';

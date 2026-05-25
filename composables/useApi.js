@@ -1,6 +1,6 @@
 export const useApi = () => {
   // const baseUrl = 'http://192.168.0.198:8000'
-  const baseUrl = 'http://192.168.1.19:8000'
+  const baseUrl = 'http://192.168.0.198:8000'
 
   const getToken = () => {
     if (process.client) return localStorage.getItem('access_token')
@@ -132,5 +132,13 @@ export const useApi = () => {
     })
   }
 
-  return { get, post, put, postForm, del }
+  const patch = async (path, body) => {
+    return await request(path, {
+      method: 'PATCH',
+      headers: authHeaders(),
+      body,
+    })
+  }
+
+  return { get, post, put, patch, postForm, del }
 }

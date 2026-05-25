@@ -65,6 +65,13 @@
             <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
           </label>
         </template>
+
+        <template #featured="{ row }">
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer" :checked="row.featured" @change="toggleFeatured(row)">
+            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-info"></div>
+          </label>
+        </template>
         
         <template #actions="{ row }">
           <div class="flex items-center gap-2">
@@ -130,7 +137,8 @@ const fetchBooks = async () => {
       price: Number(b.price) || 0,
       stock: Number(b.stock) || 0,
       rating: Number(b.rating_average) || 0,
-      status: b.is_active
+      status: b.is_active,
+      featured: b.featured
     }))
     totalBooks.value = res.data.total
   }
@@ -161,6 +169,16 @@ const toggleStatus = async (row) => {
   }
 }
 
+const toggleFeatured = async (row) => {
+  const newFeatured = !row.featured
+  const res = await updateBook(row.id, { featured: newFeatured })
+  if (res && res.ok) {
+    row.featured = newFeatured
+  } else {
+    fetchBooks()
+  }
+}
+
 const columns = [
   { key: 'book', label: 'Book' },
   { key: 'category', label: 'Category' },
@@ -168,6 +186,7 @@ const columns = [
   { key: 'stock', label: 'Stock' },
   { key: 'rating', label: 'Rating' },
   { key: 'status', label: 'Status' },
+  { key: 'featured', label: 'Featured' },
   { key: 'actions', label: 'Actions' }
 ]
 

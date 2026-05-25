@@ -86,11 +86,18 @@
         
         <div class="card">
           <h3 class="text-sm font-medium text-text-secondary mb-4">Publishing Status</h3>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-4">
             <span class="text-sm font-medium text-text-primary">Active Status</span>
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" v-model="book.status" class="sr-only peer">
               <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+            </label>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-text-primary">Featured Book</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" v-model="book.featured" class="sr-only peer">
+              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-info"></div>
             </label>
           </div>
         </div>
@@ -129,6 +136,7 @@ const book = ref({
   price: '',
   stock: '',
   status: true,
+  featured: false,
   description: '',
   isbn: '',
   publisher: '',
