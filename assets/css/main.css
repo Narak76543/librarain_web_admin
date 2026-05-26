@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +8,7 @@
 @layer base {
   body {
     @apply bg-surface text-text-primary font-sans;
+    font-family: 'Kantumruy Pro', sans-serif;
   }
 }
 
@@ -22,4 +24,67 @@
   .card {
     @apply bg-card rounded-xl border border-border p-6 shadow-none;
   }
+
+  :root {
+  /* ================= PRIMARY (Blues) ================= */
+  --primary-50: #e8f1ff;
+  --primary-100: #bfd4ff;
+  --primary-200: #93b4ff;
+  --primary-400: #3b82f6;
+  --primary-600: #1d4ed8; /* Main brand color */
+  --primary-800: #1e3a8a;
+  --primary-900: #0f2060;
+
+  /* Water Theme Accents */
+  --water-blue: #0577f9;
+  --water-blue-dark: #0063d9;
+  --water-blue-light: #1393ff;
+  --water-bubble: rgba(43, 168, 255, 0.2); /* Converted 0x33 hex opacity to standard rgba */
+
+  /* ================= ACCENT / SUCCESS (Greens) ================= */
+  --accent-50: #ecfdf5;
+  --accent-100: #d1fae5;
+  --accent-400: #10b981;
+  --accent-600: #059669; /* Price, in-stock */
+  --accent-800: #065f46;
+
+  /* ================= NEUTRALS & SURFACES ================= */
+  --white: #ffffff;
+  --transparent: transparent;
+  --background: #ffffff;
+  --surface: #f9fafb;    /* Cards, input backgrounds */
+  --border: #e5e7eb;     /* Subtle borders */
+  --divider: #f3f4f6;    /* List dividers */
+
+  /* ================= TEXT HIERARCHY ================= */
+  --text-primary: #1c1c1e;   /* Headings and body copy */
+  --text-secondary: #6b7280; /* FIXED: Accessible gray for labels, hints, and captions */
+  --text-disabled: #9ca3af;  /* Disabled text/fields */
+  --text-on-dark: #ffffff;   /* Text inside solid primary buttons or dark badges */
+
+  /* ================= SEMANTIC ALERTS ================= */
+  --error: #ef4444;
+  --error-light: #fee2e2;
+  --error-dark: #991b1b;     /* Readable text color for error banners */
+
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --warning-dark: #92400e;   /* Readable text color for warning banners */
+
+  --success: var(--accent-600);
+  --success-light: var(--accent-50);
+  --success-dark: var(--accent-800);
+
+  --info: var(--primary-600);
+  --info-light: var(--primary-50);
+  --info-dark: var(--primary-800);
+
+  /* ================= USAGE SHORTHANDS ================= */
+  --primary: var(--primary-600);
+  --accent: var(--accent-600);
+  --button-bg: var(--primary-600);
+  --button-text: var(--text-on-dark);
 }
+
+}
+

@@ -1,17 +1,18 @@
 <template>
-  <div class="min-h-screen bg-surface flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl border border-border p-10 w-full max-w-md shadow-sm">
-      <div class="flex flex-col items-center justify-center mb-8">
+  <div class="min-h-screen bg-surface flex items-center justify-center p-4 ">
+    <div class="bg-white rounded-2xl border border-border p-10 w-full max-w-md shadow-sm ">
+      <div class="flex flex-col items-center justify-center">
         <div class="flex items-center">
-          <Book class="w-10 h-10 text-primary mr-2" />
-          <h1 class="text-2xl font-bold text-primary">BookStore</h1>
-          <span class="text-[12px] text-text-secondary ml-1 mt-1">Admin</span>
+          <!-- <Book class="w-10 h-10 text-primary mr-2" />
+          <h1 class="text-2xl font-bold text-primary">BookStore</h1> -->
+          <img src="../assets/image/logo.png" alt="" style="width: 100px;">
+          <!-- <span class="text-[12px] text-text-secondary ml-1 mt-1">Admin</span> -->
         </div>
       </div>
       
-      <div class="mb-6">
-        <h2 class="text-[22px] font-bold text-[#1C1C1E] mb-1">Welcome back</h2>
-        <p class="text-sm text-text-secondary">Sign in to your admin account</p>
+      <div class="mb-6 mt-6">
+        <h2 class="text-[22px] font-bold text-[#1c1c1e] mb-1 text-center">Welcome back</h2>
+        <p class="text-sm text-text-secondary text-center">Sign in to your admin account</p>
       </div>
       
       <form @submit.prevent="handleLogin" class="space-y-4">
