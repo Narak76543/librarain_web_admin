@@ -434,7 +434,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-8vOqjs9U.mjs')
+    component: () => import('./index-EhY90qR8.mjs')
   },
   {
     name: "login",
@@ -450,17 +450,17 @@ const _routes = [
   {
     name: "books",
     path: "/books",
-    component: () => import('./index-BCTGmD7r.mjs')
+    component: () => import('./index-BG8EMzTC.mjs')
   },
   {
     name: "users",
     path: "/users",
-    component: () => import('./index-CmA8adD-.mjs')
+    component: () => import('./index-C1zOiTf-.mjs')
   },
   {
     name: "orders",
     path: "/orders",
-    component: () => import('./index-CCQAcgYG.mjs')
+    component: () => import('./index-fOsO4byp.mjs')
   },
   {
     name: "settings",
@@ -470,7 +470,7 @@ const _routes = [
   {
     name: "categories",
     path: "/categories",
-    component: () => import('./index-DkOAgFcD.mjs')
+    component: () => import('./index-CPSi_WvW.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
