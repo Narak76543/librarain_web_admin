@@ -146,6 +146,12 @@ const orderColumns = [
   { key: 'status', label: 'Status' }
 ]
 
+const formatOrderId = (id) => {
+  const raw = String(id || '').trim()
+  if (!raw) return '#ORDER'
+  return `#${raw.replace(/-/g, '').slice(0, 8).toUpperCase()}`
+}
+
 // Line chart points calculation
 const maxOrder = computed(() => Math.max(1, ...chartData.value.orders))
 const points = computed(() => {
@@ -203,7 +209,7 @@ const fetchDashboardData = async () => {
       
       // Recent Orders
       orders.value = (data.recent_orders || []).map(o => ({
-        id: o.id,
+        id: formatOrderId(o.id),
         customer: o.customer,
         date: o.created_at,
         total: parseFloat(o.total || 0),

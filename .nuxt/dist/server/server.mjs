@@ -425,7 +425,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import("./_nuxt/index-8vOqjs9U.js")
+    component: () => import("./_nuxt/index-EhY90qR8.js")
   },
   {
     name: "login",
@@ -441,17 +441,17 @@ const _routes = [
   {
     name: "books",
     path: "/books",
-    component: () => import("./_nuxt/index-BCTGmD7r.js")
+    component: () => import("./_nuxt/index-BG8EMzTC.js")
   },
   {
     name: "users",
     path: "/users",
-    component: () => import("./_nuxt/index-CmA8adD-.js")
+    component: () => import("./_nuxt/index-C1zOiTf-.js")
   },
   {
     name: "orders",
     path: "/orders",
-    component: () => import("./_nuxt/index-CCQAcgYG.js")
+    component: () => import("./_nuxt/index-fOsO4byp.js")
   },
   {
     name: "settings",
@@ -461,7 +461,7 @@ const _routes = [
   {
     name: "categories",
     path: "/categories",
-    component: () => import("./_nuxt/index-DkOAgFcD.js")
+    component: () => import("./_nuxt/index-CPSi_WvW.js")
   }
 ];
 const _wrapInTransition = (props, children) => {

@@ -84,7 +84,21 @@
                 <td class="px-6 py-4 text-center font-medium">{{ row.books }}</td>
                 <td class="px-6 py-4 font-bold text-text-primary">${{ row.total.toFixed(2) }}</td>
                 <td class="px-6 py-4">
-                  <StatusBadge :status="row.status" />
+                  <div class="flex flex-col items-start gap-1">
+                    <StatusBadge :status="row.status" />
+                    <span 
+                      v-if="row.deliveryWay === 'Delivery'" 
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 text-[11px] font-semibold border border-sky-100 shadow-sm"
+                    >
+                      {{ row.deliveryPartner || 'Standard' }}
+                    </span>
+                    <span 
+                      v-else 
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 text-[11px] font-semibold border border-amber-100 shadow-sm"
+                    >
+                      Pick Up
+                    </span>
+                  </div>
                 </td>
                 <td class="px-6 py-4 text-right">
                   <button class="w-8 h-8 inline-flex items-center justify-center rounded-lg hover:bg-border text-text-secondary transition-all" :class="{'rotate-180 bg-white shadow-sm border border-border text-primary': expandedRow === row.id}">
@@ -149,6 +163,28 @@
                           <div>
                             <p class="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Placed On</p>
                             <p class="text-sm text-text-primary">{{ row.date }} at {{ row.time }}</p>
+                          </div>
+
+                          <div>
+                            <p class="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Delivery Details</p>
+                            <div class="flex flex-col gap-1 text-sm bg-white border border-border rounded-lg p-3 shadow-sm">
+                              <div class="flex justify-between">
+                                <span class="text-text-secondary text-xs">Way:</span>
+                                <span class="font-bold text-text-primary text-xs">{{ row.deliveryWay }}</span>
+                              </div>
+                              <div v-if="row.deliveryWay === 'Delivery'" class="flex justify-between border-t border-border/50 pt-1.5 mt-1.5">
+                                <span class="text-text-secondary text-xs">Partner:</span>
+                                <span class="font-bold text-primary text-xs">Via {{ row.deliveryPartner }}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p class="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Payment Method</p>
+                            <div class="flex justify-between items-center bg-white border border-border rounded-lg px-3 py-2 text-xs shadow-sm">
+                              <span class="text-text-secondary">Method:</span>
+                              <span class="font-bold text-text-primary font-mono uppercase">{{ row.paymentMethod }}</span>
+                            </div>
                           </div>
                           
                           <div>
@@ -257,25 +293,31 @@ const fetchOrders = async () => {
 
     totalOrders.value = res?.data?.total || res?.total || rawOrders.length || 0
 
-    orders.value = rawOrders.map(o => ({
-      id: o.id || o._id || o.order_id || `ORD-${Math.floor(Math.random()*1000)}`,
-      customer: o.customer?.full_name || o.user?.name || o.customer_name || 'Unknown Customer',
-      email: o.customer?.email || o.user?.email || o.email || '',
-      address: o.shipping_address || o.address || '452 Tech Lane, Austin, TX 78701', // Fallback address
-      date: o.created_at ? new Date(o.created_at).toLocaleDateString() : (o.date || 'N/A'),
-      time: o.created_at ? new Date(o.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '10:00 AM',
-      books: o.items_count || o.items?.length || o.books || 0,
-      total: parseFloat(o.total || o.total_amount || 0),
-      status: o.status ? (o.status.charAt(0).toUpperCase() + o.status.slice(1)) : 'Pending',
-      items: (o.order_items || o.items || []).map(item => ({
-        id: item.id || item.book_id || item.book?.id || Math.random(),
-        title: item.book_title || item.book?.title || item.title || 'Unknown Book',
-        author: item.book?.author || item.author || 'Unknown Author',
-        cover: item.book_cover || item.book?.cover_url || item.book?.cover || item.cover || 'https://via.placeholder.com/48x64',
-        price: parseFloat(item.price || item.unit_price || 0),
-        quantity: item.quantity || 1
-      }))
-    }))
+    orders.value = rawOrders.map(o => {
+      const id = o.id || o._id || o.order_id || `ORD-${Math.floor(Math.random()*1000)}`
+      return {
+        id,
+        customer: o.customer?.full_name || o.user?.name || o.customer_name || 'Unknown Customer',
+        email: o.customer?.email || o.user?.email || o.email || '',
+        address: o.delivery_address || o.shipping_address || o.address || (o.delivery_way === 'Pick Up' ? 'Store Pick Up (Main Shop)' : 'No address specified'),
+        date: o.created_at ? new Date(o.created_at).toLocaleDateString() : (o.date || 'N/A'),
+        time: o.created_at ? new Date(o.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '10:00 AM',
+        books: o.items_count || o.items?.length || o.books || 0,
+        total: parseFloat(o.total || o.total_amount || 0),
+        status: o.status ? (o.status.charAt(0).toUpperCase() + o.status.slice(1)) : 'Pending',
+        deliveryWay: o.delivery_way || 'Pick Up',
+        deliveryPartner: o.delivery_partner,
+        paymentMethod: o.payment_method || 'COD',
+        items: (o.order_items || o.items || []).map(item => ({
+          id: item.id || item.book_id || item.book?.id || Math.random(),
+          title: item.book_title || item.book?.title || item.title || 'Unknown Book',
+          author: item.book?.author || item.author || 'Unknown Author',
+          cover: item.book_cover || item.book?.cover_url || item.book?.cover || item.cover || 'https://via.placeholder.com/48x64',
+          price: parseFloat(item.price || item.unit_price || 0),
+          quantity: item.quantity || 1
+        }))
+      }
+    })
     
     // In case there is no data and it's local dev, inject some fake items just to not break the UI if items are missing
     orders.value.forEach(o => {
