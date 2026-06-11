@@ -3,7 +3,7 @@
     <div class="bg-white rounded-2xl border border-border p-10 w-full max-w-md shadow-sm">
       <div class="flex flex-col items-center justify-center mb-8">
         <div class="flex items-center">
-          <Book class="w-10 h-10 text-primary mr-2" />
+          <img src="~/assets/images/icon.png" class="w-10 h-10 mr-2 object-contain" alt="Logo" />
           <h1 class="text-2xl font-bold text-primary">BookStore</h1>
           <span class="text-[12px] text-text-secondary ml-1 mt-1">Admin</span>
         </div>
