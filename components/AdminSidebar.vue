@@ -1,7 +1,7 @@
 <template>
   <aside class="w-60 fixed left-0 top-0 h-full bg-white border-r border-border flex flex-col z-20">
     <div class="h-16 flex items-center px-6 border-b border-border">
-      <Book class="text-primary w-6 h-6 mr-2" />
+      <img src="~/assets/images/icon.png" class="w-8 h-8 mr-2 object-contain" alt="Logo" />
       <span class="text-lg font-semibold text-text-primary">BookStore</span>
       <span class="text-[12px] text-text-secondary ml-1 mt-1">Admin</span>
     </div>

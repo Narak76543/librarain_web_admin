@@ -1,6 +1,6 @@
 export const useApi = () => {
   // const baseUrl = 'http://192.168.0.198:8000'
-  const baseUrl = 'http://192.168.1.4:8000'
+  const baseUrl = 'http://192.168.1.77:8000'
 
   const getToken = () => {
     if (process.client) return localStorage.getItem('access_token')
