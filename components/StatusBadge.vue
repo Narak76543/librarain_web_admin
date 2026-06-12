@@ -26,18 +26,18 @@ const displayStatus = computed(() => {
 
 const badgeClass = computed(() => {
   const s = String(displayStatus.value).toLowerCase()
-  if (s === 'delivered' || s === 'active') {
-    return 'bg-primary-light text-primary'
+  if (s === 'completed' || s === 'delivered' || s === 'active') {
+    return 'bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm'
   }
   if (s === 'processing') {
-    return 'bg-amber-100 text-amber-700'
+    return 'bg-blue-50 text-blue-600 border border-blue-100 shadow-sm'
   }
   if (s === 'pending') {
-    return 'bg-blue-100 text-blue-700'
+    return 'bg-amber-50 text-amber-600 border border-amber-100 shadow-sm'
   }
   if (s === 'cancelled' || s === 'error') {
-    return 'bg-red-100 text-error'
+    return 'bg-red-50 text-red-600 border border-red-100 shadow-sm'
   }
-  return 'bg-gray-100 text-text-secondary'
+  return 'bg-gray-50 text-gray-600 border border-gray-200 shadow-sm'
 })
 </script>

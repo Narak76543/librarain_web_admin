@@ -1,10 +1,17 @@
 <template>
-  <div class="min-h-screen bg-surface flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl border border-border p-10 w-full max-w-md shadow-sm">
+  <div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-surface">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img src="~/assets/images/login_bg.png" alt="Background" class="w-full h-full object-cover opacity-70" />
+      <div class="absolute inset-0 bg-surface/30 backdrop-blur-[2px]"></div>
+    </div>
+    
+    <!-- Login Card -->
+    <div class="bg-card/90 backdrop-blur-xl rounded-2xl border border-white/40 p-10 w-full max-w-md shadow-2xl relative z-10">
       <div class="flex flex-col items-center justify-center mb-8">
         <div class="flex items-center">
           <img src="~/assets/images/icon.png" class="w-10 h-10 mr-2 object-contain" alt="Logo" />
-          <h1 class="text-2xl font-bold text-primary">BookStore</h1>
+          <h1 class="text-2xl font-bold text-primary">Librarain</h1>
           <span class="text-[12px] text-text-secondary ml-1 mt-1">Admin</span>
         </div>
       </div>
@@ -20,7 +27,7 @@
           <input 
             v-model="email" 
             type="email" 
-            placeholder="admin@bookstore.com" 
+            placeholder="admin@librarain.com" 
             class="w-full h-10 border border-border rounded-lg px-3 focus:border-primary focus:outline-none focus:ring-0" 
             required 
           />
@@ -81,7 +88,7 @@
       </form>
       
       <div class="mt-8 text-center flex flex-col items-center">
-        <p class="text-[12px] text-text-secondary">BookStore Admin Panel</p>
+        <p class="text-[12px] text-text-secondary">Librarain Admin Panel</p>
         <p class="text-[11px] text-text-secondary mt-0.5">© 2026 All rights reserved</p>
       </div>
     </div>

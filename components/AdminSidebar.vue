@@ -1,8 +1,8 @@
 <template>
-  <aside class="w-60 fixed left-0 top-0 h-full bg-white border-r border-border flex flex-col z-20">
+  <aside class="w-60 fixed left-0 top-0 h-full bg-card border-r border-border flex flex-col z-20">
     <div class="h-16 flex items-center px-6 border-b border-border">
       <img src="~/assets/images/icon.png" class="w-8 h-8 mr-2 object-contain" alt="Logo" />
-      <span class="text-lg font-semibold text-text-primary">BookStore</span>
+      <span class="text-lg font-semibold text-text-primary">Librarain</span>
       <span class="text-[12px] text-text-secondary ml-1 mt-1">Admin</span>
     </div>
     
@@ -11,11 +11,11 @@
         v-for="item in navItems" 
         :key="item.path"
         :to="item.path"
-        class="h-11 rounded-lg px-4 flex items-center gap-3 transition-colors"
+        class="h-[38px] rounded-md px-3 flex items-center gap-3 transition-colors text-[13px]"
         :class="[
           route.path === item.path 
-            ? 'bg-primary-light text-primary border-l-4 border-primary font-semibold' 
-            : 'text-text-secondary hover:bg-surface font-medium'
+            ? 'bg-surface text-primary font-semibold' 
+            : 'text-text-secondary hover:text-text-primary hover:bg-surface font-medium'
         ]"
       >
         <component :is="item.icon" class="w-5 h-5" />
@@ -47,7 +47,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Book, LayoutDashboard, Library, Tags, ShoppingCart, Users, Settings, LogOut } from 'lucide-vue-next'
+import { Book, LayoutDashboard, Library, Tags, ShoppingCart, Users, Settings, LogOut, BarChart } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
@@ -91,10 +91,10 @@ const initials = computed(() => {
 
 const navItems = [
   { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/books', label: 'Books', icon: Library },
-  { path: '/categories', label: 'Categories', icon: Tags },
+  { path: '/inventory', label: 'Inventory', icon: Library },
   { path: '/orders', label: 'Orders', icon: ShoppingCart },
   { path: '/users', label: 'Users', icon: Users },
+  { path: '/reports', label: 'Report Center', icon: BarChart },
   { path: '/settings', label: 'Settings', icon: Settings },
 ]
 

@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-6 max-w-6xl">
     <div class="flex items-center gap-4">
-      <NuxtLink to="/books" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface transition-colors">
+      <NuxtLink to="/inventory" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface transition-colors">
         <ArrowLeft class="w-5 h-5 text-text-secondary" />
       </NuxtLink>
       <h2 class="text-xl font-semibold text-text-primary">{{ isEditing ? 'Edit Book' : 'Add New Book' }}</h2>
@@ -47,14 +47,16 @@
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-text-secondary mb-1">Price ($)</label>
-            <input type="number" step="0.01" v-model="book.price" class="w-full" placeholder="0.00" />
+            <label class="block text-sm font-medium text-text-secondary mb-1">Cost Price ($)</label>
+            <input type="number" step="0.01" v-model="book.cost_price" class="w-full" placeholder="0.00" />
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-text-secondary mb-1">Stock</label>
-            <input type="number" v-model="book.stock" class="w-full" placeholder="0" />
+            <label class="block text-sm font-medium text-text-secondary mb-1">Sale Price ($)</label>
+            <input type="number" step="0.01" v-model="book.price" class="w-full" placeholder="0.00" />
           </div>
+          
+
           
           <div>
             <label class="block text-sm font-medium text-text-secondary mb-1">Pages</label>
@@ -88,22 +90,32 @@
           <h3 class="text-sm font-medium text-text-secondary mb-4">Publishing Status</h3>
           <div class="flex items-center justify-between mb-4">
             <span class="text-sm font-medium text-text-primary">Active Status</span>
-            <label class="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" v-model="book.status" class="sr-only peer">
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-            </label>
+            <button 
+              type="button"
+              @click="book.status = !book.status"
+              class="px-2.5 py-1 text-[11px] font-semibold rounded-full transition-colors border shadow-sm"
+              :class="book.status ? 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10' : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100'"
+            >
+              {{ book.status ? 'Active' : 'Inactive' }}
+            </button>
           </div>
           <div class="flex items-center justify-between">
             <span class="text-sm font-medium text-text-primary">Featured Book</span>
-            <label class="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" v-model="book.featured" class="sr-only peer">
-              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-info"></div>
-            </label>
+            <button 
+              type="button"
+              @click="book.featured = !book.featured"
+              class="w-8 h-8 flex items-center justify-center rounded-full transition-all hover:bg-surface active:scale-95"
+            >
+              <Star 
+                class="w-5 h-5 transition-colors" 
+                :class="book.featured ? 'text-warning fill-warning drop-shadow-sm' : 'text-gray-300 hover:text-warning/40'" 
+              />
+            </button>
           </div>
         </div>
         
         <div class="flex items-center gap-4">
-          <NuxtLink to="/books" class="flex-1 h-10 flex items-center justify-center rounded-lg border border-border bg-white text-sm font-medium text-text-primary hover:bg-surface transition-colors">
+          <NuxtLink to="/inventory" class="flex-1 h-10 flex items-center justify-center rounded-lg border border-border bg-white text-sm font-medium text-text-primary hover:bg-surface transition-colors">
             Cancel
           </NuxtLink>
           <button @click="handleSave" class="flex-1 btn-primary">
@@ -133,8 +145,8 @@ const book = ref({
   title: '',
   author: '',
   category_id: '',
+  cost_price: '',
   price: '',
-  stock: '',
   status: true,
   featured: false,
   description: '',
@@ -176,11 +188,19 @@ const handleSave = async () => {
   let bookId = route.params.id
   
   if (isEditing.value) {
-    await updateBook(bookId, payload)
+    const updateRes = await updateBook(bookId, payload)
+    if (!updateRes || !updateRes.ok) {
+      alert('Failed to update book. Please check your inputs.')
+      return
+    }
   } else {
+    payload.stock = 0 // Initialize stock to 0 for new books
     const res = await createBook(payload)
     if (res && res.ok) {
       bookId = res.data.id
+    } else {
+      alert('Failed to create book. Please check your inputs.')
+      return
     }
   }
 
@@ -188,6 +208,6 @@ const handleSave = async () => {
     await uploadCover(bookId, selectedCover.value)
   }
   
-  router.push('/books')
+  router.push('/inventory')
 }
 </script>

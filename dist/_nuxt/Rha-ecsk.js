@@ -1,1 +1,0 @@
-import{u as i}from"./AGZONXQu.js";const y=()=>{const{get:t,post:a,put:r,del:o}=i();return{getCategories:async()=>await t("/api/v1/categories"),createCategory:async e=>await a("/api/v1/categories",e),updateCategory:async(e,s)=>await r(`/api/v1/categories/${e}`,s),deleteCategory:async e=>await o(`/api/v1/categories/${e}`)}};export{y as u};

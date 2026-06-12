@@ -10,15 +10,15 @@
             type="text" 
             v-model="searchQuery" 
             placeholder="Search users..." 
-            class="pl-9 w-64 bg-white" 
+            class="pl-9 w-64 bg-card" 
           />
         </div>
-        <select v-model="roleFilter" class="bg-white min-w-[120px]">
+        <select v-model="roleFilter" class="bg-card min-w-[120px]">
           <option value="">All Roles</option>
           <option value="ADMIN">Admin</option>
           <option value="USER">User</option>
         </select>
-        <select v-model="statusFilter" class="bg-white min-w-[120px]">
+        <select v-model="statusFilter" class="bg-card min-w-[120px]">
           <option value="">All Status</option>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
@@ -134,7 +134,7 @@
       </div>
       
       <!-- Pagination -->
-      <div v-if="total > 0" class="px-6 py-4 border-t border-border bg-white flex justify-between items-center text-sm">
+      <div v-if="total > 0" class="px-6 py-4 border-t border-border bg-card flex justify-between items-center text-sm">
         <p class="text-text-secondary">Showing <span class="font-semibold text-text-primary">{{ (currentPage - 1) * perPage + 1 }}</span> to <span class="font-semibold text-text-primary">{{ Math.min(currentPage * perPage, total) }}</span> of <span class="font-semibold text-text-primary">{{ total }}</span> results</p>
         <div class="flex gap-1">
           <button @click="currentPage--" :disabled="currentPage === 1" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface">&lt;</button>
@@ -147,7 +147,7 @@
     <!-- Slide-in Profile Panel -->
     <div v-if="isPanelOpen" class="fixed inset-0 bg-black/20 z-40" @click="isPanelOpen = false"></div>
     <div 
-      class="fixed top-0 right-0 h-full w-full max-w-md bg-white border-l border-border shadow-2xl z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto"
+      class="fixed top-0 right-0 h-full w-full max-w-md bg-card border-l border-border shadow-2xl z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto"
       :class="isPanelOpen ? 'translate-x-0' : 'translate-x-full'"
     >
       <div class="p-6">
@@ -259,7 +259,7 @@
               <button @click="handleForceLogout(selectedUser)" class="text-error hover:underline normal-case text-[11px]">Force Logout All</button>
             </h5>
             <div class="space-y-2">
-              <div v-for="sess in selectedUser.sessions" :key="sess.id" class="text-xs bg-white border border-border p-3 rounded-lg">
+              <div v-for="sess in selectedUser.sessions" :key="sess.id" class="text-xs bg-card border border-border p-3 rounded-lg">
                 <p class="font-semibold mb-1">{{ sess.device_name }}</p>
                 <p class="text-text-secondary truncate">{{ sess.user_agent }}</p>
                 <div class="flex justify-between mt-2 text-text-secondary">
