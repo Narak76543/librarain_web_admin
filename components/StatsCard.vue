@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex items-center gap-4">
+  <div class="card flex items-center gap-4 animate-fade-in-up group">
     <div class="w-12 h-12 rounded-full flex items-center justify-center" :class="colorClass">
       <component :is="icon" class="w-6 h-6" />
     </div>

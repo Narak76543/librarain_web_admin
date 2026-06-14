@@ -1,5 +1,5 @@
 <template>
-  <header class="h-16 bg-white border-b border-border px-6 flex items-center justify-between sticky top-0 z-10">
+  <header class="h-16 bg-card border-b border-border px-6 flex items-center justify-between sticky top-0 z-10">
     <h1 class="text-xl font-semibold text-text-primary">{{ pageTitle }}</h1>
     <div class="flex items-center gap-4">
       <div class="relative">

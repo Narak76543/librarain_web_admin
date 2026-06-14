@@ -94,6 +94,14 @@ export const useApi = () => {
     })
   }
 
+  const getFile = async (path) => {
+    return await request(path, {
+      method: 'GET',
+      headers: authHeaders(),
+      responseType: 'blob',
+    })
+  }
+
   const post = async (path, body) => {
     return await request(path, {
       method: 'POST',
@@ -140,5 +148,5 @@ export const useApi = () => {
     })
   }
 
-  return { get, post, put, patch, postForm, del }
+  return { get, getFile, post, put, patch, postForm, del }
 }

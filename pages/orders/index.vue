@@ -8,7 +8,7 @@
           <span class="text-text-secondary text-sm pb-0.5">{{ totalOrders }} orders total</span>
         </div>
       </div>
-      <button @click="exportCSV" class="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-lg text-text-primary hover:bg-surface transition-colors font-medium text-sm shadow-sm">
+      <button @click="exportCSV" class="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg text-text-primary hover:bg-surface transition-colors font-medium text-sm shadow-sm">
         <Download class="w-4 h-4" />
         Export CSV
       </button>
@@ -18,22 +18,23 @@
     <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
       <div class="relative w-full xl:w-96">
         <Search class="w-4 h-4 text-text-secondary absolute left-4 top-1/2 -translate-y-1/2" />
-        <input type="text" v-model="searchQuery" @keyup.enter="fetchOrders" placeholder="Search orders by ID or customer name..." class="pl-10 pr-4 py-2.5 w-full bg-white border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm shadow-sm" />
+        <input type="text" v-model="searchQuery" @keyup.enter="fetchOrders" placeholder="Search orders by ID or customer name..." class="pl-10 pr-4 py-2.5 w-full bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm shadow-sm" />
       </div>
       
       <div class="flex flex-wrap items-center gap-3">
         <div class="relative">
-          <select v-model="statusFilter" @change="fetchOrders" class="appearance-none bg-white border border-border rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-text-primary cursor-pointer w-36 shadow-sm">
+          <select v-model="statusFilter" @change="fetchOrders" class="appearance-none bg-card border border-border rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-text-primary cursor-pointer w-36 shadow-sm">
             <option value="">All Statuses</option>
             <option value="pending">Pending</option>
             <option value="processing">Processing</option>
             <option value="delivered">Delivered</option>
+            <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
           </select>
           <ChevronDown class="w-4 h-4 text-text-secondary absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
         
-        <div class="flex items-center gap-4 bg-white border border-border rounded-lg px-4 py-2.5 text-sm shadow-sm">
+        <div class="flex items-center gap-4 bg-card border border-border rounded-lg px-4 py-2.5 text-sm shadow-sm">
           <span class="text-text-secondary">From</span>
           <div class="relative flex items-center gap-2 cursor-pointer group">
             <input type="date" v-model="fromDate" @change="fetchOrders" class="w-28 focus:outline-none text-text-primary bg-transparent cursor-pointer group-hover:text-primary transition-colors text-sm" />
@@ -47,13 +48,13 @@
     </div>
 
     <!-- Table Container -->
-    <div class="bg-white border border-border rounded-xl overflow-hidden shadow-sm relative">
-      <div v-if="isLoading" class="absolute inset-0 bg-white/50 backdrop-blur-sm z-10 flex items-center justify-center">
+    <div class="bg-card rounded-xl overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.04)] relative animate-fade-in">
+      <div v-if="isLoading" class="absolute inset-0 bg-card/50 backdrop-blur-sm z-10 flex items-center justify-center">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
       <div class="w-full overflow-x-auto min-h-[300px]">
         <table class="w-full text-left text-sm whitespace-nowrap">
-          <thead class="bg-surface text-text-secondary text-xs font-bold uppercase border-b border-border">
+          <thead class="bg-card text-gray-400 text-[11px] font-medium uppercase tracking-widest border-b border-gray-100">
             <tr>
               <th class="px-6 py-4 tracking-wider">Order ID</th>
               <th class="px-6 py-4 tracking-wider">Customer</th>
@@ -64,18 +65,18 @@
               <th class="px-6 py-4 text-right tracking-wider">Action</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-border">
+          <tbody class="divide-y divide-gray-50">
             <tr v-if="orders.length === 0 && !isLoading">
               <td colspan="7" class="px-6 py-8 text-center text-text-secondary">No orders found.</td>
             </tr>
             <template v-for="(row, idx) in orders" :key="row.id">
               <!-- Main Row -->
               <tr 
-                class="hover:bg-surface/50 transition-colors cursor-pointer group"
-                :class="{'bg-surface/20': idx % 2 === 1, 'bg-primary-light/40': expandedRow === row.id}"
+                class="hover:bg-gray-50/80 transition-all duration-300 cursor-pointer group"
+                :class="{'bg-primary/5': expandedRow === row.id}"
                 @click="toggleRow(row.id)"
               >
-                <td class="px-6 py-4 font-bold text-primary">{{ row.id }}</td>
+                <td class="px-6 py-4 font-bold text-primary">#{{ String(row.id).split('-')[0].toUpperCase() }}</td>
                 <td class="px-6 py-4">
                   <p class="font-bold text-text-primary">{{ row.customer }}</p>
                   <p class="text-xs text-text-secondary mt-0.5">{{ row.email }}</p>
@@ -94,14 +95,14 @@
                     </span>
                     <span 
                       v-else 
-                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 text-[11px] font-semibold border border-amber-100 shadow-sm"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-50 text-purple-600 text-[11px] font-semibold border border-purple-100 shadow-sm"
                     >
                       Pick Up
                     </span>
                   </div>
                 </td>
                 <td class="px-6 py-4 text-right">
-                  <button class="w-8 h-8 inline-flex items-center justify-center rounded-lg hover:bg-border text-text-secondary transition-all" :class="{'rotate-180 bg-white shadow-sm border border-border text-primary': expandedRow === row.id}">
+                  <button class="w-8 h-8 inline-flex items-center justify-center rounded-lg hover:bg-border text-text-secondary transition-all" :class="{'rotate-180 bg-card shadow-sm border border-border text-primary': expandedRow === row.id}">
                     <ChevronDown class="w-4 h-4 transition-transform" />
                   </button>
                 </td>
@@ -116,7 +117,7 @@
                       <h4 class="text-lg font-bold text-text-primary mb-5">Order Items</h4>
                       <div class="space-y-4">
                         <div v-if="!row.items || row.items.length === 0" class="text-text-secondary text-sm">No items found for this order.</div>
-                        <div v-for="item in row.items" :key="item.id" class="flex items-center gap-5 border border-border rounded-xl p-4 bg-white shadow-sm hover:border-primary/30 transition-colors">
+                        <div v-for="item in row.items" :key="item.id" class="flex items-center gap-5 border border-border rounded-xl p-4 bg-card shadow-sm hover:border-primary/30 transition-colors">
                           <img :src="item.cover" class="w-16 h-24 object-cover rounded-md shadow-sm border border-border/50 bg-surface" />
                           <div class="flex-1">
                             <p class="font-bold text-text-primary text-base mb-1">{{ item.title }}</p>
@@ -167,7 +168,7 @@
 
                           <div>
                             <p class="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Delivery Details</p>
-                            <div class="flex flex-col gap-1 text-sm bg-white border border-border rounded-lg p-3 shadow-sm">
+                            <div class="flex flex-col gap-1 text-sm bg-card border border-border rounded-lg p-3 shadow-sm">
                               <div class="flex justify-between">
                                 <span class="text-text-secondary text-xs">Way:</span>
                                 <span class="font-bold text-text-primary text-xs">{{ row.deliveryWay }}</span>
@@ -181,7 +182,7 @@
 
                           <div>
                             <p class="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Payment Method</p>
-                            <div class="flex justify-between items-center bg-white border border-border rounded-lg px-3 py-2 text-xs shadow-sm">
+                            <div class="flex justify-between items-center bg-card border border-border rounded-lg px-3 py-2 text-xs shadow-sm">
                               <span class="text-text-secondary">Method:</span>
                               <span class="font-bold text-text-primary font-mono uppercase">{{ row.paymentMethod }}</span>
                             </div>
@@ -190,10 +191,11 @@
                           <div>
                             <p class="text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Change Status</p>
                             <div class="relative mb-4">
-                              <select class="w-full appearance-none bg-white border border-border rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-text-primary cursor-pointer shadow-sm" v-model="row.status">
+                              <select class="w-full appearance-none bg-card border border-border rounded-lg pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-text-primary cursor-pointer shadow-sm" v-model="row.status">
                                 <option value="Pending">Pending</option>
                                 <option value="Processing">Processing</option>
                                 <option value="Delivered">Delivered</option>
+                                <option value="Completed">Completed</option>
                                 <option value="Cancelled">Cancelled</option>
                               </select>
                               <ChevronDown class="w-4 h-4 text-text-secondary absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -217,7 +219,7 @@
       <div class="px-6 py-5 border-t border-border bg-[#F9FAFB] flex flex-col md:flex-row justify-between items-center gap-4">
         <p class="text-sm text-text-secondary">Showing <span class="font-medium text-text-primary">{{ orders.length > 0 ? offset + 1 : 0 }} to {{ Math.min(offset + limit, totalOrders) }}</span> of <span class="font-medium text-text-primary">{{ totalOrders }}</span> results</p>
         <div class="flex items-center gap-1.5" v-if="totalPages > 1">
-          <button @click="prevPage" :disabled="currentPage === 1" class="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-secondary hover:bg-surface transition-colors bg-white shadow-sm disabled:opacity-50">
+          <button @click="prevPage" :disabled="currentPage === 1" class="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-secondary hover:bg-surface transition-colors bg-card shadow-sm disabled:opacity-50">
             <ChevronDown class="w-4 h-4 rotate-90" />
           </button>
           
@@ -227,7 +229,7 @@
             {{ page }}
           </button>
           
-          <button @click="nextPage" :disabled="currentPage === totalPages" class="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-secondary hover:bg-surface transition-colors bg-white shadow-sm disabled:opacity-50">
+          <button @click="nextPage" :disabled="currentPage === totalPages" class="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-secondary hover:bg-surface transition-colors bg-card shadow-sm disabled:opacity-50">
             <ChevronDown class="w-4 h-4 -rotate-90" />
           </button>
         </div>

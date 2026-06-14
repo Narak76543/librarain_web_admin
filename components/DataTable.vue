@@ -1,20 +1,19 @@
 <template>
-  <div class="w-full border border-border rounded-xl overflow-hidden bg-white">
+  <div class="w-full bg-card animate-fade-in">
     <div class="overflow-x-auto">
       <table class="w-full text-left text-sm">
-        <thead class="bg-surface text-text-secondary text-xs font-semibold uppercase border-b border-border">
+        <thead class="bg-card text-gray-400 text-[11px] font-medium uppercase tracking-widest border-b border-gray-100">
           <tr>
-            <th v-for="col in columns" :key="col.key" class="px-6 py-3" :class="col.class">
+            <th v-for="col in columns" :key="col.key" class="px-6 py-4" :class="col.class">
               {{ col.label }}
             </th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-border">
+        <tbody class="divide-y divide-gray-50">
           <tr 
             v-for="(row, idx) in rows" 
             :key="idx" 
-            class="hover:bg-surface/50 transition-colors cursor-pointer group"
-            :class="{'bg-surface/20': idx % 2 === 1}"
+            class="hover:bg-gray-50/80 transition-all duration-300 cursor-pointer group"
             @click="$emit('row-click', row)"
           >
             <td v-for="col in columns" :key="col.key" class="px-6 py-4" :class="col.class">
@@ -33,8 +32,8 @@
     </div>
     
     <!-- Pagination -->
-    <div v-if="total > 0" class="flex items-center justify-between px-6 py-4 border-t border-border bg-white">
-      <p class="text-sm text-text-secondary">
+    <div v-if="total > 0" class="flex items-center justify-between px-6 py-4 bg-card">
+      <p class="text-sm text-gray-400">
         Showing <span class="font-semibold text-text-primary">{{ (page - 1) * perPage + 1 }}</span>
         to <span class="font-semibold text-text-primary">{{ Math.min(page * perPage, total) }}</span>
         of <span class="font-semibold text-text-primary">{{ total }}</span> results

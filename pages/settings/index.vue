@@ -25,11 +25,11 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">App Name</label>
-              <input type="text" class="w-full" value="BookStore" />
+              <input type="text" class="w-full" value="Librarain" />
             </div>
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">Contact Email</label>
-              <input type="email" class="w-full" value="contact@bookstore.com" />
+              <input type="email" class="w-full" value="contact@librarain.com" />
             </div>
             <div class="md:col-span-2">
               <label class="block text-sm font-medium text-text-secondary mb-1">App Description</label>
@@ -57,11 +57,11 @@
             </div>
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">From Email</label>
-              <input type="email" class="w-full" value="no-reply@bookstore.com" />
+              <input type="email" class="w-full" value="no-reply@librarain.com" />
             </div>
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">Username</label>
-              <input type="text" class="w-full" value="admin@bookstore.com" />
+              <input type="text" class="w-full" value="admin@librarain.com" />
             </div>
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">Password</label>
@@ -84,7 +84,7 @@
           <div class="grid grid-cols-1 gap-6">
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">Cloud Name</label>
-              <input type="text" class="w-full" value="bookstore-cloud" />
+              <input type="text" class="w-full" value="librarain-cloud" />
             </div>
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">API Key</label>
@@ -122,10 +122,12 @@
               <input type="number" class="w-full" value="24" />
             </div>
             <div class="flex items-center gap-3 pt-6">
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" class="sr-only peer" checked>
-                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-              </label>
+              <button 
+                type="button"
+                class="px-2.5 py-1 text-[11px] font-semibold rounded-full transition-colors border shadow-sm bg-primary/5 text-primary border-primary/20 hover:bg-primary/10"
+              >
+                Enabled
+              </button>
               <span class="text-sm font-medium text-text-secondary">Enforce Single Session per User</span>
             </div>
           </div>
