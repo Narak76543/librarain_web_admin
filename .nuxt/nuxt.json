@@ -1,9 +1,9 @@
 {
-  "_hash": "SO47Lf16uj5M7bhFWDCcgQma1Ec8Ju8dHVPp-mIxq3M",
+  "_hash": "4BwUymYtY7WB50NUDVkfJRFUkGlQJj1R6Oc4dzQe3JU",
   "project": {
-    "rootDir": "D:/mobile_assignment/web_s2_nuxt/bookstore-admin"
+    "rootDir": "/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin"
   },
   "versions": {
-    "nuxt": "3.21.6"
+    "nuxt": "3.21.8"
   }
 }

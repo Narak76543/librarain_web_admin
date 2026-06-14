@@ -1,46 +1,49 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/h3@1.15.11/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
-import nodeCrypto from 'node:crypto';
+import crypto$1 from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, createError, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/h3/dist/index.mjs';
-import { escapeHtml } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@vue/shared/dist/shared.cjs.js';
-import viteNodeEntry_mjs from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs';
-import { viteNodeFetch } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/vite-builder/dist/vite-node.mjs';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, encodePath, joinRelativeURL } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/ufo/dist/index.mjs';
-import { renderToString } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/vue/server-renderer/index.mjs';
-import { klona } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/defu/dist/defu.mjs';
-import destr, { destr as destr$1 } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/destr/dist/index.mjs';
-import { snakeCase } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/scule/dist/index.mjs';
-import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unhead/dist/server.mjs';
-import { stringify, uneval } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/devalue/index.js';
-import { isVNode, isRef, toValue } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/vue/index.mjs';
-import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unhead/dist/plugins.mjs';
-import { createHooks } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/node-mock-http/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unstorage/drivers/fs.mjs';
-import file_58_47_47_47D_58_47mobile_assignment_47web_s2_nuxt_47bookstore_45admin_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js';
-import { digest, hash as hash$1 } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/ohash/dist/index.mjs';
-import { toRouteMatcher, createRouter } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/radix3/dist/index.mjs';
+import { escapeHtml } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/@vue+shared@3.5.38/node_modules/@vue/shared/dist/shared.cjs.js';
+import viteNodeEntry_mjs from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/@nuxt+vite-builder@3.21.8_magicast@0.5.3_nuxt@3.21.8_@parcel+watcher@2.5.6_@vue+compile_78134b0447514e1da2ddaafa8392cf8c/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs';
+import { viteNodeFetch } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/@nuxt+vite-builder@3.21.8_magicast@0.5.3_nuxt@3.21.8_@parcel+watcher@2.5.6_@vue+compile_78134b0447514e1da2ddaafa8392cf8c/node_modules/@nuxt/vite-builder/dist/vite-node.mjs';
+import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/vue-bundle-renderer@2.2.0/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, encodePath, joinRelativeURL } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/ufo@1.6.4/node_modules/ufo/dist/index.mjs';
+import { renderToString } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/vue@3.5.38/node_modules/vue/server-renderer/index.mjs';
+import destr, { destr as destr$1 } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/destr@2.0.5/node_modules/destr/dist/index.mjs';
+import { createHooks } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs';
+import { createFetch, Headers as Headers$1 } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/ofetch@1.5.1/node_modules/ofetch/dist/node.mjs';
+import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/node-mock-http@1.0.4/node_modules/node-mock-http/dist/index.mjs';
+import { defineDriver, prefixStorage } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/unstorage@1.17.5_db0@0.3.4_ioredis@5.11.1/node_modules/unstorage/dist/index.mjs';
+import { createStorage } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/unstorage/drivers/fs.mjs';
+import fsDriver from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/unstorage@1.17.5_db0@0.3.4_ioredis@5.11.1/node_modules/unstorage/drivers/fs-lite.mjs';
+import lruCache from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/unstorage@1.17.5_db0@0.3.4_ioredis@5.11.1/node_modules/unstorage/drivers/lru-cache.mjs';
+import { digest, hash as hash$1 } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/ohash@2.0.11/node_modules/ohash/dist/index.mjs';
+import { klona } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/klona@2.0.6/node_modules/klona/dist/index.mjs';
+import { defuFn } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/scule@1.3.0/node_modules/scule/dist/index.mjs';
+import { getContext } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/unctx@2.5.0/node_modules/unctx/dist/index.mjs';
+import defu from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/defu@6.1.7/node_modules/defu/dist/defu.mjs';
+import { toRouteMatcher, createRouter } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/radix3@1.1.2/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
-import consola, { consola as consola$1 } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/youch-core/build/index.js';
-import { Youch } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/source-map/source-map.js';
+import consola, { consola as consola$1 } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/consola@3.4.2/node_modules/consola/dist/index.mjs';
+import { ErrorParser } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/youch-core@0.3.3/node_modules/youch-core/build/index.js';
+import { Youch } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/youch@4.1.1/node_modules/youch/build/index.js';
+import { SourceMapConsumer } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/source-map@0.7.6/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { getContext } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/errx/dist/index.js';
-import _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/vite-builder/dist/fix-stacktrace.mjs';
+import { stringify, uneval } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/index.js';
+import { captureRawStackTrace, parseRawStackTrace } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/errx@0.1.0/node_modules/errx/dist/index.js';
+import { isVNode, isRef, toValue } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/vue@3.5.38/node_modules/vue/index.mjs';
+import _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/@nuxt+vite-builder@3.21.8_magicast@0.5.3_nuxt@3.21.8_@parcel+watcher@2.5.6_@vue+compile_78134b0447514e1da2ddaafa8392cf8c/node_modules/@nuxt/vite-builder/dist/fix-stacktrace.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$1 } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/pathe/dist/index.mjs';
-import { walkResolver } from 'file://D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/unhead/dist/utils.mjs';
+import { dirname as dirname$1, resolve as resolve$1 } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/pathe/dist/index.mjs';
+import { createHead as createHead$1, propsToString, renderSSRHead } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/unhead@2.1.15/node_modules/unhead/dist/server.mjs';
+import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/unhead/dist/plugins.mjs';
+import { walkResolver } from 'file:///Users/macme/Desktop/Mobile%203%20Folder/librarain_web_admin/node_modules/.pnpm/unhead@2.1.15/node_modules/unhead/dist/utils.mjs';
 
-const serverAssets = [{"baseName":"server","dir":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/server/assets"}];
 
 const assets$1 = createStorage();
 
@@ -48,16 +51,55 @@ for (const asset of serverAssets) {
   assets$1.mount(asset.baseName, unstorage_47drivers_47fs({ base: asset.dir, ignore: (asset?.ignore || []) }));
 }
 
+// @ts-check
+
+
+/**
+ * @param {string} item
+ */
+function normalizeFsKey (item) {
+  const safe = item.replace(/[^\w.-]/g, '_');
+  const prefix = safe.slice(0, 20);
+  const hash = crypto$1.createHash('sha256').update(item).digest('hex');
+  return `${prefix}-${hash}`
+}
+
+const _47Users_47macme_47Desktop_47Mobile_323_32Folder_47librarain_web_admin_47node_modules_47_46pnpm_47_64nuxt_43nitro_45server_643_4621_468_db0_640_463_464_ioredis_645_4611_461_magicast_640_465_463_nuxt_643_4621_468__64parcel_43w_c10e8f2200a9fda9a881dec8891f772a_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js = defineDriver(
+  /**
+   * @param {{ base?: string }} opts
+   */
+  (opts) => {
+    const fs = fsDriver({ base: opts.base });
+    const lru = lruCache({ max: 1000 });
+
+    return {
+      ...fs, // fall back to file system - only the bottom three methods are used in renderer
+      async setItem (key, value, opts) {
+        await Promise.all([
+          fs.setItem?.(normalizeFsKey(key), value, opts),
+          lru.setItem?.(key, value, opts),
+        ]);
+      },
+      async hasItem (key, opts) {
+        return await lru.hasItem(key, opts) || await fs.hasItem(normalizeFsKey(key), opts)
+      },
+      async getItem (key, opts) {
+        return await lru.getItem(key, opts) || await fs.getItem(normalizeFsKey(key), opts)
+      },
+    }
+  },
+);
+
 const storage = createStorage({});
 
 storage.mount('/assets', assets$1);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin","watchOptions":{"ignored":[null]}}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin/server","watchOptions":{"ignored":[null]}}));
-storage.mount('cache:nuxt:payload', file_58_47_47_47D_58_47mobile_assignment_47web_s2_nuxt_47bookstore_45admin_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js({"driver":"file:///D:/mobile_assignment/web_s2_nuxt/bookstore-admin/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js","base":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin/.nuxt/cache/nuxt/payload"}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin/.nuxt"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin/.nuxt/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"D:/mobile_assignment/web_s2_nuxt/bookstore-admin/.data/kv"}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin","watchOptions":{"ignored":[null]}}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/server","watchOptions":{"ignored":[null]}}));
+storage.mount('cache:nuxt:payload', _47Users_47macme_47Desktop_47Mobile_323_32Folder_47librarain_web_admin_47node_modules_47_46pnpm_47_64nuxt_43nitro_45server_643_4621_468_db0_640_463_464_ioredis_645_4611_461_magicast_640_465_463_nuxt_643_4621_468__64parcel_43w_c10e8f2200a9fda9a881dec8891f772a_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js({"driver":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/node_modules/.pnpm/@nuxt+nitro-server@3.21.8_db0@0.3.4_ioredis@5.11.1_magicast@0.5.3_nuxt@3.21.8_@parcel+w_c10e8f2200a9fda9a881dec8891f772a/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js","base":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/.nuxt/cache/nuxt/payload"}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/.nuxt"}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/.nuxt/cache"}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin/.data/kv"}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -688,6 +730,11 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
   }
 });
 
+getContext("nitro-app", {
+  asyncContext: false,
+  AsyncLocalStorage: void 0
+});
+
 function isPathInScope(pathname, base) {
   let canonical;
   try {
@@ -912,7 +959,7 @@ const parentStorageBridge = (nonce) => `
 
   // Handle clipboard copy from iframe
   window.addEventListener('message', function(e) {
-    if (isValid(e) && e.data.type === 'clipboard-copy') {
+    if (isValid(e.data) && e.data.type === 'clipboard-copy') {
       navigator.clipboard.writeText(e.data.text).catch(function() {});
     }
   });
@@ -2026,7 +2073,7 @@ async function errorHandler(error, event) {
   // H3 will handle fallback
 }
 
-const rootDir = "D:/mobile_assignment/web_s2_nuxt/bookstore-admin";
+const rootDir = "/Users/macme/Desktop/Mobile 3 Folder/librarain_web_admin";
 
 const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
 
@@ -2052,7 +2099,7 @@ const asyncContext = getContext("nuxt-dev", {
 	asyncContext: true,
 	AsyncLocalStorage
 });
-const _g6OY2LnTcZDFHwkJtM3gALg2nGSmkuS2d3IG21RNp8 = (nitroApp) => {
+const _rNZGY8GCD6C_x7j13aIB0k9HfbKjoGk8ktshSCuNv88 = (nitroApp) => {
 	const handler = nitroApp.h3App.handler;
 	nitroApp.h3App.handler = (event) => {
 		return asyncContext.callAsync({
@@ -2128,26 +2175,11 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _g6OY2LnTcZDFHwkJtM3gALg2nGSmkuS2d3IG21RNp8,
+  _rNZGY8GCD6C_x7j13aIB0k9HfbKjoGk8ktshSCuNv88,
 _wH6JrtIxmaSoA8lCPWFnE9z4lQeXW6H5z3l5aymEQw
 ];
 
-const assets = {
-  "/index.mjs": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"1aebf-vMT2lIWH20/9T8rFFTnnisPLDeQ\"",
-    "mtime": "2026-06-03T17:09:56.133Z",
-    "size": 110271,
-    "path": "index.mjs"
-  },
-  "/index.mjs.map": {
-    "type": "application/json",
-    "etag": "\"6d4e5-teDlCGSV/QQSqYALsbkCl+QIhDE\"",
-    "mtime": "2026-06-03T17:09:56.133Z",
-    "size": 447717,
-    "path": "index.mjs.map"
-  }
-};
+const assets = {};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -2172,7 +2204,7 @@ function getAsset (id) {
 
 const METHODS = /* @__PURE__ */ new Set(["HEAD", "GET"]);
 const EncodingMap = { gzip: ".gz", br: ".br" };
-const _1pA9LY = eventHandler((event) => {
+const _yJ4sWi = eventHandler((event) => {
   if (event.method && !METHODS.has(event.method)) {
     return;
   }
@@ -2678,13 +2710,13 @@ async function getIslandContext(event) {
 	};
 }
 
-const _lazy_mkmTy8 = () => Promise.resolve().then(function () { return renderer; });
+const _lazy_sc2g9y = () => Promise.resolve().then(function () { return renderer; });
 
 const handlers = [
-  { route: '', handler: _1pA9LY, lazy: false, middleware: true, method: undefined },
-  { route: '/__nuxt_error', handler: _lazy_mkmTy8, lazy: true, middleware: false, method: undefined },
+  { route: '', handler: _yJ4sWi, lazy: false, middleware: true, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_sc2g9y, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: handler$1, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_mkmTy8, lazy: true, middleware: false, method: undefined }
+  { route: '/**', handler: _lazy_sc2g9y, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -2905,7 +2937,7 @@ async function runTask(name, {
 }
 
 if (!globalThis.crypto) {
-  globalThis.crypto = nodeCrypto.webcrypto;
+  globalThis.crypto = crypto$1.webcrypto;
 }
 const { NITRO_NO_UNIX_SOCKET, NITRO_DEV_WORKER_ID } = process.env;
 trapUnhandledNodeErrors();
@@ -3092,7 +3124,6 @@ const HAS_APP_TELEPORTS = !!(appTeleportAttrs.id);
 const APP_TELEPORT_OPEN_TAG = HAS_APP_TELEPORTS ? `<${appTeleportTag}${propsToString(appTeleportAttrs)}>` : "";
 const APP_TELEPORT_CLOSE_TAG = HAS_APP_TELEPORTS ? `</${appTeleportTag}>` : "";
 const PAYLOAD_URL_RE = /^[^?]*\/_payload.json(?:\?.*)?$/ ;
-const PAYLOAD_FILENAME = "_payload.json" ;
 const handler = defineRenderHandler((event) => {
 	
 	const ssrError = event.path.startsWith("/__nuxt_error") ? getQuery$1(event) : null;
@@ -3123,18 +3154,17 @@ async function renderRoute(event, ssrError) {
 	}
 	
 	const routeOptions = getRouteRules(event);
+	if (routeOptions.ssr === false) {
+		ssrContext.noSSR = true;
+	}
 	
-	const _PAYLOAD_EXTRACTION = !ssrContext.noSSR && (NUXT_RUNTIME_PAYLOAD_EXTRACTION);
-	const isRenderingPayload = (_PAYLOAD_EXTRACTION || routeOptions.prerender) && PAYLOAD_URL_RE.test(ssrContext.url);
+	!ssrContext.noSSR && (NUXT_RUNTIME_PAYLOAD_EXTRACTION);
+	const isRenderingPayload = (routeOptions.prerender) && PAYLOAD_URL_RE.test(ssrContext.url);
 	if (isRenderingPayload) {
 		const url = ssrContext.url.substring(0, ssrContext.url.lastIndexOf("/")) || "/";
 		ssrContext.url = url;
 		event._path = event.node.req.url = url;
 	}
-	if (routeOptions.ssr === false) {
-		ssrContext.noSSR = true;
-	}
-	const payloadURL = _PAYLOAD_EXTRACTION ? joinURL(ssrContext.runtimeConfig.app.cdnURL || ssrContext.runtimeConfig.app.baseURL, ssrContext.url.replace(/\?.*$/, ""), PAYLOAD_FILENAME) + "?" + ssrContext.runtimeConfig.app.buildId : undefined;
 	
 	const renderer = await getRenderer(ssrContext);
 	const _rendered = await renderer.renderToString(ssrContext).catch(async (error) => {
@@ -3172,15 +3202,6 @@ async function renderRoute(event, ssrError) {
 	
 	const { styles, scripts } = getRequestDependencies(ssrContext, renderer.rendererContext);
 	
-	if (_PAYLOAD_EXTRACTION && !NO_SCRIPTS) {
-		ssrContext.head.push({ link: [{
-			rel: "preload",
-			as: "fetch",
-			crossorigin: "anonymous",
-			href: payloadURL
-		} ] }, headEntryOptions);
-	}
-	
 	if (inlinedStyles.length) {
 		ssrContext.head.push({ style: inlinedStyles });
 	}
@@ -3215,11 +3236,7 @@ async function renderRoute(event, ssrError) {
 		ssrContext.head.push({ link: getPreloadLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
 		ssrContext.head.push({ link: getPrefetchLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
 		
-		ssrContext.head.push({ script: _PAYLOAD_EXTRACTION ? renderPayloadJsonScript({
-			ssrContext,
-			data: splitPayload(ssrContext).initial,
-			src: payloadURL
-		})  : renderPayloadJsonScript({
+		ssrContext.head.push({ script: renderPayloadJsonScript({
 			ssrContext,
 			data: ssrContext.payload
 		})  }, {

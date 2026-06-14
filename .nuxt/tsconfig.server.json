@@ -30,7 +30,7 @@
         "../*"
       ],
       "nuxt": [
-        "../node_modules/nuxt"
+        "../node_modules/.pnpm/nuxt@3.21.8_@parcel+watcher@2.5.6_@vue+compiler-sfc@3.5.38_cac@6.7.14_db0@0.3.4_ioredis_58f65e781b4c526585adaa28eb54375d/node_modules/nuxt"
       ],
       "@unhead/vue": [
         "../node_modules/@unhead/vue"
@@ -44,11 +44,8 @@
       "@vue/compiler-sfc": [
         "../node_modules/@vue/compiler-sfc"
       ],
-      "unplugin-vue-router/client": [
-        "../node_modules/unplugin-vue-router/client"
-      ],
       "@nuxt/schema": [
-        "../node_modules/@nuxt/schema"
+        "../node_modules/.pnpm/@nuxt+schema@3.21.8/node_modules/@nuxt/schema"
       ],
       "defu": [
         "../node_modules/defu"
@@ -65,6 +62,12 @@
       "crossws": [
         "../node_modules/crossws"
       ],
+      "unplugin-vue-router/client": [
+        "../node_modules/unplugin-vue-router/client"
+      ],
+      "nitropack": [
+        "../node_modules/nitropack"
+      ],
       "vite/client": [
         "../node_modules/vite/client"
       ],
@@ -73,9 +76,6 @@
       ],
       "nitropack/runtime": [
         "../node_modules/nitropack/runtime"
-      ],
-      "nitropack": [
-        "../node_modules/nitropack"
       ],
       "#shared": [
         "../shared"
@@ -108,10 +108,10 @@
         "./*"
       ],
       "#internal/nuxt/paths": [
-        "../node_modules/@nuxt/nitro-server/dist/runtime/utils/paths"
+        "../node_modules/.pnpm/@nuxt+nitro-server@3.21.8_db0@0.3.4_ioredis@5.11.1_magicast@0.5.3_nuxt@3.21.8_@parcel+w_c10e8f2200a9fda9a881dec8891f772a/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths"
       ],
       "#unhead/composables": [
-        "../node_modules/nuxt/dist/head/runtime/composables/v3"
+        "../node_modules/.pnpm/nuxt@3.21.8_@parcel+watcher@2.5.6_@vue+compiler-sfc@3.5.38_cac@6.7.14_db0@0.3.4_ioredis_58f65e781b4c526585adaa28eb54375d/node_modules/nuxt/dist/head/runtime/composables/v3"
       ]
     },
     "lib": [
@@ -124,6 +124,8 @@
   },
   "include": [
     "./types/nitro-nuxt.d.ts",
+    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.14.0_magicast@0.5.3_yaml@2.9.0/node_modules/runtime/server",
+    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.14.0_magicast@0.5.3_yaml@2.9.0/node_modules/dist/runtime/server",
     "../node_modules/runtime/server",
     "../node_modules/dist/runtime/server",
     "../server/**/*",
@@ -133,8 +135,8 @@
   ],
   "exclude": [
     "../node_modules",
-    "../node_modules/nuxt/node_modules",
-    "../node_modules/@nuxtjs/tailwindcss/node_modules",
+    "../node_modules/.pnpm/nuxt@3.21.8_@parcel+watcher@2.5.6_@vue+compiler-sfc@3.5.38_cac@6.7.14_db0@0.3.4_ioredis_58f65e781b4c526585adaa28eb54375d/node_modules/nuxt/node_modules",
+    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.14.0_magicast@0.5.3_yaml@2.9.0/node_modules/@nuxtjs/tailwindcss/node_modules",
     "../node_modules/@nuxt/telemetry/node_modules",
     "../dist"
   ]
