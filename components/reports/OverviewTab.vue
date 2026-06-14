@@ -12,35 +12,6 @@
       </div>
     </div>
 
-    <!-- Filters -->
-    <div class="card flex flex-wrap items-end gap-4 bg-card p-4">
-      <div>
-        <label class="block text-sm font-medium text-text-secondary mb-1">Period</label>
-        <select v-model="period" class="bg-surface border border-border rounded px-3 py-2 min-w-[150px]">
-          <option value="">All Time</option>
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-          <option value="yearly">Yearly</option>
-          <option value="custom">Custom Range</option>
-        </select>
-      </div>
-      
-      <template v-if="period === 'custom'">
-        <div>
-          <label class="block text-sm font-medium text-text-secondary mb-1">Date From</label>
-          <input type="date" v-model="dateFrom" class="bg-surface border border-border rounded px-3 py-2" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-text-secondary mb-1">Date To</label>
-          <input type="date" v-model="dateTo" class="bg-surface border border-border rounded px-3 py-2" />
-        </div>
-      </template>
-
-      <button @click="fetchReport" class="btn-primary ml-auto">
-        Generate Report
-      </button>
-    </div>
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4" v-if="summary">
@@ -90,6 +61,9 @@
         :page="1"
         :perPage="Math.max(rows.length, 1)"
       >
+        <template #total_invested="{ row }">
+          ${{ Number(row.total_invested).toFixed(2) }}
+        </template>
         <template #cost_price="{ row }">
           ${{ Number(row.cost_price).toFixed(2) }}
         </template>
@@ -119,9 +93,10 @@ const summary = ref(null)
 
 const columns = [
   { key: 'book_title', label: 'Book Title' },
-  { key: 'author', label: 'Author' },
   { key: 'category', label: 'Category' },
-  { key: 'stock', label: 'Stock' },
+  { key: 'total_stock_in', label: 'Total Qty Bought' },
+  { key: 'total_invested', label: 'Total Invested' },
+  { key: 'stock', label: 'Current Stock' },
   { key: 'cost_price', label: 'Cost Price' },
   { key: 'sale_price', label: 'Sale Price' },
   { key: 'stock_value', label: 'Stock Value' },

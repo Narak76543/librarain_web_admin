@@ -49,8 +49,13 @@
         <template #cost_price="{ row }">
           ${{ row.cost_price.toFixed(2) }}
         </template>
-        <template #sale_price="{ row }">
-          ${{ Number(row.sale_price).toFixed(2) }}
+        <template #total_cost="{ row }">
+          ${{ Number(row.total_cost).toFixed(2) }}
+        </template>
+        <template #note="{ row }">
+          <span class="text-sm text-text-secondary truncate max-w-[150px] inline-block" :title="row.note">
+            {{ row.note || '—' }}
+          </span>
         </template>
       </DataTable>
     </div>
@@ -73,7 +78,8 @@ const columns = [
   { key: 'quantity', label: 'Qty Added' },
   { key: 'current_stock', label: 'Current Stock' },
   { key: 'cost_price', label: 'Cost Price' },
-  { key: 'sale_price', label: 'Sale Price' },
+  { key: 'total_cost', label: 'Total Cost' },
+  { key: 'note', label: 'Notes' },
   { key: 'admin', label: 'Processed By' },
 ]
 

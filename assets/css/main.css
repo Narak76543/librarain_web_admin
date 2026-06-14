@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 14.5px;
+  }
+  
   body {
     @apply bg-surface text-text-primary font-sans;
     background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1.5px, transparent 1.5px);
@@ -27,4 +31,29 @@
   .card {
     @apply bg-card rounded-2xl p-6 border border-border shadow-[0_2px_12px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgb(0,0,0,0.04)] hover:border-border/80 transition-all duration-300;
   }
+}
+
+/* --- Global Nuxt Page & Layout Transitions --- */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(8px) scale(0.995);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+}
+
+/* Smooth Scrolling globally */
+html {
+  scroll-behavior: smooth;
 }

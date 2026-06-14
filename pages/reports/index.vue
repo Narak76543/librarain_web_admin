@@ -22,6 +22,7 @@
     <!-- Tab Content -->
     <div class="mt-6">
       <OverviewTab v-if="currentTab === 'overview'" />
+      <DailyReportTab v-if="currentTab === 'daily_report'" />
       <SalesHistoryTab v-if="currentTab === 'sales_history'" />
       <StockInHistoryTab v-if="currentTab === 'stock_in_history'" />
       <SalesByBookTab v-if="currentTab === 'sales_by_book'" />
@@ -32,12 +33,14 @@
 <script setup>
 import { ref } from 'vue'
 import OverviewTab from '~/components/reports/OverviewTab.vue'
+import DailyReportTab from '~/components/reports/DailyReportTab.vue'
 import SalesHistoryTab from '~/components/reports/SalesHistoryTab.vue'
 import StockInHistoryTab from '~/components/reports/StockInHistoryTab.vue'
 import SalesByBookTab from '~/components/reports/SalesByBookTab.vue'
 
 const tabs = [
   { id: 'overview', label: 'Stock Overview' },
+  { id: 'daily_report', label: 'Daily Report' },
   { id: 'sales_history', label: 'Sales History' },
   { id: 'stock_in_history', label: 'Stock-In History' },
   { id: 'sales_by_book', label: 'Sales by Book' }
