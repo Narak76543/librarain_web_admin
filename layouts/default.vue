@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-surface flex">
+  <div class="min-h-screen bg-transparent flex">
     <AdminSidebar v-if="!isLoginPage" />
     <div class="flex-1 flex flex-col min-w-0" :class="{ 'ml-60': !isLoginPage }">
       <AdminTopbar v-if="!isLoginPage" />

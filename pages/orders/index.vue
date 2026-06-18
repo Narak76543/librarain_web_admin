@@ -48,32 +48,32 @@
     </div>
 
     <!-- Table Container -->
-    <div class="bg-card rounded-xl overflow-hidden shadow-[0_2px_12px_rgb(0,0,0,0.04)] relative animate-fade-in">
+    <div class="card !p-0 overflow-hidden relative animate-fade-in">
       <div v-if="isLoading" class="absolute inset-0 bg-card/50 backdrop-blur-sm z-10 flex items-center justify-center">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
       <div class="w-full overflow-x-auto min-h-[300px]">
         <table class="w-full text-left text-sm whitespace-nowrap">
-          <thead class="bg-card text-gray-400 text-[11px] font-medium uppercase tracking-widest border-b border-gray-100">
+          <thead class="bg-surface text-text-secondary text-xs font-semibold uppercase border-b border-border">
             <tr>
-              <th class="px-6 py-4 tracking-wider">Order ID</th>
-              <th class="px-6 py-4 tracking-wider">Customer</th>
-              <th class="px-6 py-4 tracking-wider">Date</th>
-              <th class="px-6 py-4 text-center tracking-wider">Items</th>
-              <th class="px-6 py-4 tracking-wider">Total</th>
-              <th class="px-6 py-4 tracking-wider">Status</th>
-              <th class="px-6 py-4 text-right tracking-wider">Action</th>
+              <th class="px-6 py-3 tracking-wider">Order ID</th>
+              <th class="px-6 py-3 tracking-wider">Customer</th>
+              <th class="px-6 py-3 tracking-wider">Date</th>
+              <th class="px-6 py-3 text-center tracking-wider">Items</th>
+              <th class="px-6 py-3 tracking-wider">Total</th>
+              <th class="px-6 py-3 tracking-wider">Status</th>
+              <th class="px-6 py-3 text-right tracking-wider">Action</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-50">
+          <tbody class="divide-y divide-border">
             <tr v-if="orders.length === 0 && !isLoading">
               <td colspan="7" class="px-6 py-8 text-center text-text-secondary">No orders found.</td>
             </tr>
             <template v-for="(row, idx) in orders" :key="row.id">
               <!-- Main Row -->
               <tr 
-                class="hover:bg-gray-50/80 transition-all duration-300 cursor-pointer group"
-                :class="{'bg-primary/5': expandedRow === row.id}"
+                class="hover:bg-surface/50 transition-colors group cursor-pointer"
+                :class="{'bg-primary/5': expandedRow === row.id, 'bg-surface/20': idx % 2 === 1 && expandedRow !== row.id}"
                 @click="toggleRow(row.id)"
               >
                 <td class="px-6 py-4 font-bold text-primary">#{{ String(row.id).split('-')[0].toUpperCase() }}</td>
@@ -216,21 +216,22 @@
       </div>
       
       <!-- Pagination -->
-      <div class="px-6 py-5 border-t border-border bg-[#F9FAFB] flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm text-text-secondary">Showing <span class="font-medium text-text-primary">{{ orders.length > 0 ? offset + 1 : 0 }} to {{ Math.min(offset + limit, totalOrders) }}</span> of <span class="font-medium text-text-primary">{{ totalOrders }}</span> results</p>
-        <div class="flex items-center gap-1.5" v-if="totalPages > 1">
-          <button @click="prevPage" :disabled="currentPage === 1" class="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-secondary hover:bg-surface transition-colors bg-card shadow-sm disabled:opacity-50">
-            <ChevronDown class="w-4 h-4 rotate-90" />
+      <div v-if="totalOrders > 0" class="px-6 py-4 border-t border-border bg-card flex justify-between items-center text-sm">
+        <p class="text-text-secondary">Showing <span class="font-semibold text-text-primary">{{ orders.length > 0 ? offset + 1 : 0 }}</span> to <span class="font-semibold text-text-primary">{{ Math.min(offset + limit, totalOrders) }}</span> of <span class="font-semibold text-text-primary">{{ totalOrders }}</span> results</p>
+        
+        <div class="flex gap-1" v-if="totalPages > 1">
+          <button @click="prevPage" :disabled="currentPage === 1" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface">
+            &lt;
           </button>
           
           <button v-for="page in displayedPages" :key="page" @click="goToPage(page)" 
-                  class="w-9 h-9 rounded-lg text-sm shadow-sm transition-colors font-medium"
-                  :class="page === currentPage ? 'bg-primary text-white font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary bg-transparent'">
+                  class="w-8 h-8 rounded flex items-center justify-center text-sm font-medium transition-colors"
+                  :class="page === currentPage ? 'bg-primary text-white font-bold' : 'text-text-secondary hover:bg-surface border border-border'">
             {{ page }}
           </button>
           
-          <button @click="nextPage" :disabled="currentPage === totalPages" class="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-text-secondary hover:bg-surface transition-colors bg-card shadow-sm disabled:opacity-50">
-            <ChevronDown class="w-4 h-4 -rotate-90" />
+          <button @click="nextPage" :disabled="currentPage === totalPages" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface">
+            &gt;
           </button>
         </div>
       </div>

@@ -46,11 +46,19 @@
 
       <!-- Sales Overview (Area Chart) -->
       <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-        <h3 class="text-sm font-semibold text-gray-900 mb-1">Sales Overview</h3>
-        <p class="text-xs text-gray-500 mb-6">Financial performance comparison for the selected period</p>
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900 mb-1">Sales Overview</h3>
+            <p class="text-xs text-gray-500 mb-0">Financial performance comparison for the selected period</p>
+          </div>
+          <div class="flex bg-surface p-1 rounded-lg">
+            <button @click="graphPeriod = 'this_month'; fetchGraphData()" :class="graphPeriod === 'this_month' ? 'bg-white shadow-sm text-text-primary font-bold' : 'text-text-secondary hover:text-text-primary'" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all">This Month</button>
+            <button @click="graphPeriod = 'prev_month'; fetchGraphData()" :class="graphPeriod === 'prev_month' ? 'bg-white shadow-sm text-text-primary font-bold' : 'text-text-secondary hover:text-text-primary'" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all">Previous Month</button>
+          </div>
+        </div>
         <div class="h-72 w-full">
           <ClientOnly>
-            <apexchart type="area" height="100%" :options="salesChartOptions" :series="salesSeries"></apexchart>
+            <apexchart :key="chartKey" type="area" height="100%" :options="salesChartOptions" :series="salesSeries"></apexchart>
           </ClientOnly>
         </div>
       </div>
@@ -151,7 +159,9 @@ import { CalendarIcon, DownloadIcon, DollarSign, TrendingDown, Briefcase, BookOp
 const api = useApi()
 const isLoading = ref(true)
 const period = ref('30d')
+const graphPeriod = ref('this_month')
 const data = ref({})
+const chartKey = ref(0)
 
 const formatCurrency = (val) => {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val || 0)
@@ -163,11 +173,30 @@ const fetchDashboardData = async () => {
     const res = await api.get(`/api/v1/admin/dashboard?period=${period.value}`)
     if (res && res.ok) {
       data.value = res.data
+      chartKey.value++
+      graphPeriod.value = period.value === '24h' || period.value === '7d' || period.value === '30d' ? 'this_month' : period.value
+      // We still need to call fetchGraphData() because data.value.sales_overview returned by the main API call 
+      // will be based on the global period (e.g. 30d, 7d), not the calendar month!
+      if (graphPeriod.value === 'this_month' && period.value !== 'this_month') {
+        fetchGraphData()
+      }
     }
   } catch (e) {
     console.error('Failed to fetch dashboard data', e)
   } finally {
     isLoading.value = false
+  }
+}
+
+const fetchGraphData = async () => {
+  try {
+    const res = await api.get(`/api/v1/admin/dashboard?period=${graphPeriod.value}`)
+    if (res && res.ok) {
+      data.value.sales_overview = res.data.sales_overview
+      chartKey.value++
+    }
+  } catch (e) {
+    console.error('Failed to fetch graph data', e)
   }
 }
 
