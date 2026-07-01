@@ -2,8 +2,8 @@
   <div class="space-y-8 pb-10">
     <div class="flex justify-between items-end">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Analytics Overview</h1>
-        <p class="text-sm text-gray-500 mt-1">Welcome back, Admin. Here is your bookstore's performance.</p>
+        <h1 class="text-2xl font-bold text-text-primary">Analytics Overview</h1>
+        <p class="text-sm text-text-secondary mt-1">Welcome back, Admin. Here is your bookstore's performance.</p>
       </div>
       <!-- Time filter -->
       <div class="flex gap-2">
@@ -11,13 +11,13 @@
           <select 
             v-model="period" 
             @change="fetchDashboardData"
-            class="appearance-none bg-white border border-gray-200 text-gray-700 pl-9 pr-8 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/20 shadow-sm cursor-pointer"
+            class="appearance-none bg-card border border-border text-text-secondary pl-9 pr-8 py-2 rounded-lg text-sm font-medium hover:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20  cursor-pointer"
           >
             <option value="24h">Last 24 Hours</option>
             <option value="7d">Last 7 Days</option>
             <option value="30d">Last 30 Days</option>
           </select>
-          <CalendarIcon class="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <CalendarIcon class="w-4 h-4 text-text-secondary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
       </div>
     </div>
@@ -25,35 +25,34 @@
     <!-- Skeletons while loading -->
     <div v-if="isLoading" class="space-y-8 animate-pulse">
       <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <div v-for="i in 5" :key="i" class="h-32 bg-white rounded-xl border border-gray-100 shadow-sm"></div>
+        <div v-for="i in 5" :key="i" class="h-32 bg-card rounded-xl border border-border "></div>
       </div>
-      <div class="h-96 bg-white rounded-xl border border-gray-100 shadow-sm"></div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="h-64 bg-white rounded-xl border border-gray-100 shadow-sm"></div>
-        <div class="h-64 bg-white rounded-xl border border-gray-100 shadow-sm"></div>
+      <div class="h-96 bg-card rounded-xl border border-border "></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="h-64 bg-card rounded-xl border border-border "></div>
+        <div class="h-64 bg-card rounded-xl border border-border "></div>
       </div>
     </div>
 
     <div v-else class="space-y-8">
       <!-- KPIs -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <DashboardKpiCard title="Revenue Today" :value="formatCurrency(data.kpis.revenue_today)" :trend="data.kpis.revenue_trend" icon="DollarSign" color="green" />
-        <DashboardKpiCard title="Cost Today" :value="formatCurrency(data.kpis.cost_today)" :trend="data.kpis.cost_trend" icon="TrendingDown" color="red" />
         <DashboardKpiCard title="Net Profit" :value="formatCurrency(data.kpis.net_profit)" :trend="data.kpis.profit_trend" icon="Briefcase" color="blue" />
         <DashboardKpiCard title="Books Sold" :value="data.kpis.books_sold.toString()" :trend="data.kpis.books_sold_trend" icon="BookOpen" color="purple" />
         <DashboardKpiCard title="Inventory Value" :value="formatCurrency(data.kpis.inventory_value)" trend="" icon="Archive" color="indigo" />
       </div>
 
       <!-- Sales Overview (Area Chart) -->
-      <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+      <div class="bg-card p-4 rounded-xl border border-border ">
         <div class="flex justify-between items-start mb-6">
           <div>
-            <h3 class="text-sm font-semibold text-gray-900 mb-1">Sales Overview</h3>
-            <p class="text-xs text-gray-500 mb-0">Financial performance comparison for the selected period</p>
+            <h3 class="text-sm font-semibold text-text-primary mb-1">Sales Overview</h3>
+            <p class="text-xs text-text-secondary mb-0">Financial performance comparison for the selected period</p>
           </div>
           <div class="flex bg-surface p-1 rounded-lg">
-            <button @click="graphPeriod = 'this_month'; fetchGraphData()" :class="graphPeriod === 'this_month' ? 'bg-white shadow-sm text-text-primary font-bold' : 'text-text-secondary hover:text-text-primary'" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all">This Month</button>
-            <button @click="graphPeriod = 'prev_month'; fetchGraphData()" :class="graphPeriod === 'prev_month' ? 'bg-white shadow-sm text-text-primary font-bold' : 'text-text-secondary hover:text-text-primary'" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all">Previous Month</button>
+            <button @click="graphPeriod = 'this_month'; fetchGraphData()" :class="graphPeriod === 'this_month' ? 'bg-card  text-text-primary font-bold' : 'text-text-secondary hover:text-text-primary'" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all">This Month</button>
+            <button @click="graphPeriod = 'prev_month'; fetchGraphData()" :class="graphPeriod === 'prev_month' ? 'bg-card  text-text-primary font-bold' : 'text-text-secondary hover:text-text-primary'" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all">Previous Month</button>
           </div>
         </div>
         <div class="h-72 w-full">
@@ -64,11 +63,11 @@
       </div>
 
       <!-- Stock In / Out -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="bg-card p-4 rounded-xl border border-border ">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="text-sm font-semibold text-gray-900">Stock In Today</h3>
-            <span class="text-[10px] font-bold text-[#059669] bg-[#059669]/10 px-2 py-1 rounded">ARRIVALS</span>
+            <h3 class="text-sm font-semibold text-text-primary">Stock In Today</h3>
+            <span class="text-[10px] font-bold text-text-secondary border border-border bg-surface px-2 py-1 rounded">ARRIVALS</span>
           </div>
           <div class="h-56 w-full">
             <ClientOnly>
@@ -76,10 +75,10 @@
             </ClientOnly>
           </div>
         </div>
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+        <div class="bg-card p-4 rounded-xl border border-border ">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="text-sm font-semibold text-gray-900">Stock Out Today</h3>
-            <span class="text-[10px] font-bold text-rose-600 bg-rose-100 px-2 py-1 rounded">SALES</span>
+            <h3 class="text-sm font-semibold text-text-primary">Stock Out Today</h3>
+            <span class="text-[10px] font-bold text-text-secondary border border-border bg-surface px-2 py-1 rounded">SALES</span>
           </div>
           <div class="h-56 w-full">
             <ClientOnly>
@@ -90,10 +89,10 @@
       </div>
 
       <!-- Analytics Row -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <!-- Delivery -->
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col">
-          <h3 class="text-sm font-semibold text-gray-900 mb-6">Delivery Analytics</h3>
+        <div class="bg-card p-4 rounded-xl border border-border  flex flex-col">
+          <h3 class="text-sm font-semibold text-text-primary mb-6">Delivery Analytics</h3>
           <div class="flex-1 flex items-center justify-center">
             <ClientOnly>
               <apexchart type="donut" width="220" :options="deliveryOptions" :series="deliverySeries"></apexchart>
@@ -102,8 +101,8 @@
         </div>
 
         <!-- Payment -->
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col">
-          <h3 class="text-sm font-semibold text-gray-900 mb-6">Payment Analytics</h3>
+        <div class="bg-card p-4 rounded-xl border border-border  flex flex-col">
+          <h3 class="text-sm font-semibold text-text-primary mb-6">Payment Analytics</h3>
           <div class="flex-1 flex items-center justify-center">
             <ClientOnly>
               <apexchart type="donut" width="220" :options="paymentOptions" :series="paymentSeries"></apexchart>
@@ -112,8 +111,8 @@
         </div>
 
         <!-- Profit Breakdown -->
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col">
-          <h3 class="text-sm font-semibold text-gray-900 mb-6">Profit Breakdown Today</h3>
+        <div class="bg-card p-4 rounded-xl border border-border  flex flex-col">
+          <h3 class="text-sm font-semibold text-text-primary mb-6">Profit Breakdown Today</h3>
           <div class="flex-1 w-full">
              <ClientOnly>
               <apexchart type="bar" height="200" :options="waterfallOptions" :series="waterfallSeries"></apexchart>
@@ -123,26 +122,26 @@
       </div>
 
       <!-- Best Selling Books -->
-      <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-gray-50 flex justify-between items-center">
-          <h3 class="text-sm font-semibold text-gray-900">Best Selling Books</h3>
+      <div class="bg-card rounded-xl border border-border  overflow-hidden">
+        <div class="p-4 border-b border-gray-50 flex justify-between items-center">
+          <h3 class="text-sm font-semibold text-text-primary">Best Selling Books</h3>
           <NuxtLink to="/books" class="text-xs font-semibold text-[#059669] hover:underline">View All Books</NuxtLink>
         </div>
         <div class="divide-y divide-gray-50">
-          <div v-for="book in data.best_sellers" :key="book.title" class="p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors">
-            <img :src="book.cover_url || '/placeholder.png'" class="w-12 h-16 object-cover rounded shadow-sm border border-gray-200" />
+          <div v-for="book in data.best_sellers" :key="book.title" class="p-4 flex items-center gap-4 hover:bg-surface transition-colors">
+            <img :src="book.cover_url || '/placeholder.png'" class="w-12 h-16 object-cover rounded  border border-border" />
             <div class="flex-1">
-              <h4 class="text-sm font-bold text-gray-900">{{ book.title }}</h4>
-              <p class="text-xs text-gray-500">{{ book.author }}</p>
+              <h4 class="text-sm font-bold text-text-primary">{{ book.title }}</h4>
+              <p class="text-xs text-text-secondary">{{ book.author }}</p>
             </div>
             <div class="text-right">
-              <div class="text-sm font-bold text-gray-900">{{ book.sold }} Sold</div>
+              <div class="text-sm font-bold text-text-primary">{{ book.sold }} Sold</div>
               <div class="text-xs font-medium" :class="book.trend && book.trend.includes('-') ? 'text-rose-600' : 'text-[#059669]'">
                 {{ formatCurrency(book.revenue) }} ({{ book.trend || '0%' }})
               </div>
             </div>
           </div>
-          <div v-if="!data.best_sellers?.length" class="p-8 text-center text-sm text-gray-500">
+          <div v-if="!data.best_sellers?.length" class="p-8 text-center text-sm text-text-secondary">
             No sales data available yet.
           </div>
         </div>

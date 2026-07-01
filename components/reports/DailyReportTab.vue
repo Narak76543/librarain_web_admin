@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <div class="flex items-center justify-between">
       <h2 class="text-lg font-semibold text-text-primary">Daily Report ({{ formatDate(selectedDate) }})</h2>
       <div class="flex items-center gap-2">
@@ -34,15 +34,15 @@
       <div>
         <h3 class="text-md font-semibold text-text-primary mb-4">Daily Summary Snapshot</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="card bg-card p-5 border border-border">
+          <div class="card bg-card p-4 border border-border">
             <p class="text-sm font-medium text-text-secondary">Revenue Today</p>
             <p class="text-2xl font-bold text-text-primary mt-2">${{ reportData.daily_summary.revenue_today.toFixed(2) }}</p>
           </div>
-          <div class="card bg-card p-5 border border-border">
+          <div class="card bg-card p-4 border border-border">
             <p class="text-sm font-medium text-text-secondary">Cost Today</p>
             <p class="text-2xl font-bold text-text-primary mt-2">${{ reportData.daily_summary.cost_today.toFixed(2) }}</p>
           </div>
-          <div class="card bg-card p-5 border border-border">
+          <div class="card bg-card p-4 border border-border">
             <p class="text-sm font-medium text-text-secondary">Net Profit</p>
             <p class="text-2xl font-bold text-success mt-2">
               ${{ reportData.daily_summary.net_profit.toFixed(2) }}
@@ -51,7 +51,7 @@
               </span>
             </p>
           </div>
-          <div class="card bg-card p-5 border border-border flex flex-col justify-center space-y-1">
+          <div class="card bg-card p-4 border border-border flex flex-col justify-center space-y-1">
             <div class="flex justify-between text-sm">
               <span class="text-text-secondary">Delivery:</span><span class="font-medium text-text-primary">{{ reportData.daily_summary.by_delivery }}</span>
             </div>

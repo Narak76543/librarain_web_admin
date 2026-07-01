@@ -29,10 +29,6 @@ const icon = computed(() => {
 })
 
 const colorClass = computed(() => {
-  if (props.type === 'books') return 'bg-blue-100 text-blue-600'
-  if (props.type === 'orders') return 'bg-amber-100 text-amber-600'
-  if (props.type === 'users') return 'bg-purple-100 text-purple-600'
-  if (props.type === 'revenue') return 'bg-green-100 text-green-600'
-  return 'bg-gray-100 text-gray-600'
+  return 'bg-card border border-border text-text-primary shadow-sm'
 })
 </script>

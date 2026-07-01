@@ -5,6 +5,22 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-surface: 248 249 250; /* #F8F9FA */
+    --color-card: 255 255 255; /* #FFFFFF */
+    --color-border: 235 235 235; /* #EBEBEB */
+    --color-text-primary: 17 24 39; /* #111827 */
+    --color-text-secondary: 107 114 128; /* #6B7280 */
+  }
+
+  .dark {
+    --color-surface: 15 23 42; /* #0F172A */
+    --color-card: 30 41 59; /* #1E293B */
+    --color-border: 51 65 85; /* #334155 */
+    --color-text-primary: 248 250 252; /* #F8FAFC */
+    --color-text-secondary: 148 163 184; /* #94A3B8 */
+  }
+
   html {
     font-size: 14.5px;
   }
@@ -12,7 +28,7 @@
   body {
     @apply bg-surface text-text-primary font-sans;
     min-height: 100vh;
-    transition: all 0.3s ease-in-out;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -21,15 +37,38 @@
   input,
   select,
   textarea {
-    @apply h-10 bg-card border border-border rounded-lg px-4 text-sm text-text-primary transition-all duration-300 focus:bg-card focus:border-primary focus:shadow-[0_0_0_4px_rgba(62,207,142,0.15)] outline-none ring-0 hover:border-border/80;
+    @apply h-9 bg-card border border-border rounded text-sm text-text-primary transition-colors focus:bg-card focus:border-primary focus:ring-1 focus:ring-primary outline-none hover:border-gray-400;
+  }
+
+  /* Remove default spin buttons from number inputs */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
   }
 
   .btn-primary {
-    @apply bg-primary text-white rounded-lg h-10 px-5 hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 font-medium text-sm flex items-center justify-center active:translate-y-0 border border-transparent;
+    @apply bg-gray-900 dark:bg-primary text-white rounded h-9 px-4 hover:bg-gray-800 dark:hover:bg-primary-hover transition-colors font-medium text-sm flex items-center justify-center border border-transparent;
   }
 
   .card {
-    @apply bg-card rounded-2xl p-6 border border-border shadow-[0_2px_12px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_24px_rgb(0,0,0,0.04)] hover:border-border/80 transition-all duration-300;
+    @apply bg-card rounded border border-border p-4 transition-colors;
+  }
+
+  .th {
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    @apply text-text-secondary bg-surface border-b border-border;
+  }
+  .td {
+    padding: 8px 16px;
+    font-size: 13px;
+    @apply text-text-primary border-b border-border;
   }
 }
 
@@ -57,3 +96,5 @@
 html {
   scroll-behavior: smooth;
 }
+
+

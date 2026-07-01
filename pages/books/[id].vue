@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 max-w-6xl">
+  <div class="space-y-4 max-w-6xl">
     <div class="flex items-center gap-4">
       <NuxtLink to="/inventory" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface transition-colors">
         <ArrowLeft class="w-5 h-5 text-text-secondary" />
@@ -7,10 +7,10 @@
       <h2 class="text-xl font-semibold text-text-primary">{{ isEditing ? 'Edit Book' : 'Add New Book' }}</h2>
     </div>
     
-    <div class="flex flex-col lg:flex-row gap-6">
+    <div class="flex flex-col lg:flex-row gap-4">
       <!-- Form Fields Left 2/3 -->
       <div class="lg:w-2/3 card">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="md:col-span-2">
             <label class="block text-sm font-medium text-text-secondary mb-1">Book Title</label>
             <input type="text" v-model="book.title" class="w-full" placeholder="Enter book title" />
@@ -56,8 +56,10 @@
             <input type="number" step="0.01" v-model="book.price" class="w-full" placeholder="0.00" />
           </div>
           
-
-          
+          <div>
+            <label class="block text-sm font-medium text-text-secondary mb-1">Target Profit Margin (%)</label>
+            <input type="number" step="0.1" v-model="book.min_profit_margin" class="w-full" placeholder="20.0" />
+          </div>
           <div>
             <label class="block text-sm font-medium text-text-secondary mb-1">Pages</label>
             <input type="number" v-model="book.pages" class="w-full" placeholder="Number of pages" />
@@ -80,7 +82,7 @@
       </div>
       
       <!-- Sidebar Right 1/3 -->
-      <div class="lg:w-1/3 flex flex-col gap-6">
+      <div class="lg:w-1/3 flex flex-col gap-4">
         <div class="card">
           <h3 class="text-sm font-medium text-text-secondary mb-4">Cover Image</h3>
           <ImageUpload :initialUrl="book.cover_url" @file-selected="f => selectedCover = f" />
@@ -94,7 +96,7 @@
               type="button"
               @click="book.status = !book.status"
               class="px-2.5 py-1 text-[11px] font-semibold rounded-full transition-colors border shadow-sm"
-              :class="book.status ? 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10' : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100'"
+              :class="book.status ? 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10' : 'bg-gray-50 text-text-secondary border-gray-200 dark:border-gray-500/20 hover:bg-gray-100'"
             >
               {{ book.status ? 'Active' : 'Inactive' }}
             </button>
@@ -115,7 +117,7 @@
         </div>
         
         <div class="flex items-center gap-4">
-          <NuxtLink to="/inventory" class="flex-1 h-10 flex items-center justify-center rounded-lg border border-border bg-white text-sm font-medium text-text-primary hover:bg-surface transition-colors">
+          <NuxtLink to="/inventory" class="flex-1 h-10 flex items-center justify-center rounded-lg border border-border bg-card text-sm font-medium text-text-primary hover:bg-surface transition-colors">
             Cancel
           </NuxtLink>
           <button @click="handleSave" class="flex-1 btn-primary">
@@ -128,7 +130,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeft } from 'lucide-vue-next'
 
@@ -147,6 +149,7 @@ const book = ref({
   category_id: '',
   cost_price: '',
   price: '',
+  min_profit_margin: 20.0,
   status: true,
   featured: false,
   description: '',
@@ -173,6 +176,21 @@ onMounted(async () => {
         category_id: b.category ? b.category.id : '',
         status: b.is_active !== undefined ? b.is_active : true
       }
+    }
+  }
+})
+
+watch([() => book.value.cost_price, () => book.value.min_profit_margin], ([newCost, newMargin]) => {
+  // Strict FIFO Pricing: We previously did NOT auto-calculate price on the frontend when editing.
+  // However, we are re-enabling it for convenience when inputting target profit margin.
+  
+  const cost = Number(newCost) || 0
+  const margin = Number(newMargin) || 0
+  const calculatedPrice = cost * (1 + margin / 100)
+  
+  if (calculatedPrice > 0) {
+    if (Number(book.value.price || 0) < calculatedPrice) {
+      book.value.price = calculatedPrice.toFixed(2)
     }
   }
 })

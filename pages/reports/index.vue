@@ -1,50 +1,106 @@
 <template>
-  <div class="space-y-6">
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-text-primary">Reports</h1>
-    </div>
+  <div class="p-4">
+    <h1 class="text-2xl font-bold text-text-primary mb-2">Reports</h1>
+    <p class="text-text-secondary text-sm mb-8">
+      Select a report type to view sales and stock data
+    </p>
 
-    <!-- Tabs -->
-    <div class="inline-flex gap-1 p-1 bg-surface/50 rounded-xl">
-      <button 
-        v-for="tab in tabs" 
-        :key="tab.id"
-        @click="currentTab = tab.id"
-        class="px-5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300"
-        :class="currentTab === tab.id 
-          ? 'bg-card text-primary shadow-sm' 
-          : 'text-text-secondary hover:text-text-primary hover:bg-surface'"
-      >
-        {{ tab.label }}
-      </button>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-    <!-- Tab Content -->
-    <div class="mt-6">
-      <OverviewTab v-if="currentTab === 'overview'" />
-      <DailyReportTab v-if="currentTab === 'daily_report'" />
-      <SalesHistoryTab v-if="currentTab === 'sales_history'" />
-      <StockInHistoryTab v-if="currentTab === 'stock_in_history'" />
-      <SalesByBookTab v-if="currentTab === 'sales_by_book'" />
+      <!-- Purchase Orders -->
+      <NuxtLink to="/reports/purchase-orders"
+        class="bg-card rounded border border-gray-200 dark:border-gray-500/20 p-4
+               hover:border-primary transition-colors group">
+        <div class="w-12 h-12 border border-amber-200 dark:border-amber-500/20 bg-amber-50/50 dark:bg-amber-500/10 rounded flex items-center
+                    justify-center mb-4 group-hover:bg-amber-500
+                    group-hover:text-white transition-colors duration-300">
+          <FileText :size="22" class="text-amber-600 group-hover:text-white transition duration-300"/>
+        </div>
+        <h2 class="font-bold text-text-primary mb-1">Purchase Orders Report</h2>
+        <p class="text-sm text-text-secondary">
+          Supplier expenses, pending POs, and cost breakdowns
+        </p>
+        <div class="mt-4 flex items-center text-amber-600 text-sm font-semibold">
+          View Report <ChevronRight :size="16" class="ml-1"/>
+        </div>
+      </NuxtLink>
+
+      <!-- Daily -->
+      <NuxtLink to="/reports/daily"
+        class="bg-card rounded border border-gray-200 dark:border-gray-500/20 p-4
+               hover:border-primary transition-colors group">
+        <div class="w-12 h-12 border border-green-200 dark:border-green-500/20 bg-green-50/50 dark:bg-green-500/10 rounded flex items-center
+                    justify-center mb-4 group-hover:bg-primary
+                    group-hover:text-white transition duration-300">
+          <Calendar :size="22" class="text-primary group-hover:text-white transition duration-300"/>
+        </div>
+        <h2 class="font-bold text-text-primary mb-1">Daily Report</h2>
+        <p class="text-sm text-text-secondary">
+          Today's orders, revenue, profit and stock movement
+        </p>
+        <div class="mt-4 flex items-center text-primary text-sm font-semibold">
+          View Report <ChevronRight :size="16" class="ml-1"/>
+        </div>
+      </NuxtLink>
+
+      <!-- Weekly -->
+      <NuxtLink to="/reports/weekly"
+        class="bg-card rounded border border-gray-200 dark:border-gray-500/20 p-4
+               hover:border-primary transition-colors group">
+        <div class="w-12 h-12 border border-emerald-200 dark:border-emerald-500/20 bg-emerald-50/50 dark:bg-emerald-500/10 rounded flex items-center
+                    justify-center mb-4 group-hover:bg-emerald-600
+                    group-hover:text-white transition duration-300">
+          <CalendarDays :size="22" class="text-emerald-600 group-hover:text-white transition duration-300"/>
+        </div>
+        <h2 class="font-bold text-text-primary mb-1">Weekly Report</h2>
+        <p class="text-sm text-text-secondary">
+          Weekly summary, daily sales trend, delivery/payment charts
+        </p>
+        <div class="mt-4 flex items-center text-emerald-600 text-sm font-semibold">
+          View Report <ChevronRight :size="16" class="ml-1"/>
+        </div>
+      </NuxtLink>
+
+      <!-- Monthly -->
+      <NuxtLink to="/reports/monthly"
+        class="bg-card rounded border border-gray-200 dark:border-gray-500/20 p-4
+               hover:border-primary transition-colors group">
+        <div class="w-12 h-12 border border-blue-200 dark:border-blue-500/20 bg-blue-50/50 dark:bg-blue-500/10 rounded flex items-center
+                    justify-center mb-4 group-hover:bg-blue-600
+                    group-hover:text-white transition duration-300">
+          <BarChart2 :size="22" class="text-blue-600 group-hover:text-white transition duration-300"/>
+        </div>
+        <h2 class="font-bold text-text-primary mb-1">Monthly Report</h2>
+        <p class="text-sm text-text-secondary">
+          Monthly trends, top books, category breakdown
+        </p>
+        <div class="mt-4 flex items-center text-blue-600 text-sm font-semibold">
+          View Report <ChevronRight :size="16" class="ml-1"/>
+        </div>
+      </NuxtLink>
+
+      <!-- Yearly -->
+      <NuxtLink to="/reports/yearly"
+        class="bg-card rounded border border-gray-200 dark:border-gray-500/20 p-4
+               hover:border-primary transition-colors group">
+        <div class="w-12 h-12 border border-purple-200 dark:border-purple-500/20 bg-purple-50/50 dark:bg-purple-500/10 rounded flex items-center
+                    justify-center mb-4 group-hover:bg-purple-600
+                    group-hover:text-white transition duration-300">
+          <TrendingUp :size="22" class="text-purple-600 group-hover:text-white transition duration-300"/>
+        </div>
+        <h2 class="font-bold text-text-primary mb-1">Yearly Report</h2>
+        <p class="text-sm text-text-secondary">
+          Full year performance, growth trends, annual summary
+        </p>
+        <div class="mt-4 flex items-center text-purple-600 text-sm font-semibold">
+          View Report <ChevronRight :size="16" class="ml-1"/>
+        </div>
+      </NuxtLink>
+
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import OverviewTab from '~/components/reports/OverviewTab.vue'
-import DailyReportTab from '~/components/reports/DailyReportTab.vue'
-import SalesHistoryTab from '~/components/reports/SalesHistoryTab.vue'
-import StockInHistoryTab from '~/components/reports/StockInHistoryTab.vue'
-import SalesByBookTab from '~/components/reports/SalesByBookTab.vue'
-
-const tabs = [
-  { id: 'overview', label: 'Stock Overview' },
-  { id: 'daily_report', label: 'Daily Report' },
-  { id: 'sales_history', label: 'Sales History' },
-  { id: 'stock_in_history', label: 'Stock-In History' },
-  { id: 'sales_by_book', label: 'Sales by Book' }
-]
-
-const currentTab = ref('overview')
+import { Calendar, CalendarDays, ChevronRight, BarChart2, TrendingUp, FileText } from 'lucide-vue-next'
 </script>

@@ -16,7 +16,7 @@
         </div>
       </div>
       
-      <div class="mb-6">
+      <div class="mb-4">
         <h2 class="text-[22px] font-bold text-[#1C1C1E] mb-1">Welcome back</h2>
         <p class="text-sm text-text-secondary">Sign in to your admin account</p>
       </div>
@@ -59,7 +59,7 @@
           <!-- 401 -->
           <div v-if="errorType === 'invalid'" class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-sm">
             {{ errorMessage }}
-            <span v-if="remainingAttempts" class="text-gray-500 text-xs block mt-1">
+            <span v-if="remainingAttempts" class="text-text-secondary text-xs block mt-1">
               {{ remainingAttempts }} attempts remaining before lockout
             </span>
           </div>
@@ -70,7 +70,7 @@
           </div>
           
           <!-- Network Error -->
-          <div v-else class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-gray-600 text-sm">
+          <div v-else class="bg-gray-50 border border-gray-200 dark:border-gray-500/20 rounded-lg p-3 text-text-secondary text-sm">
             {{ errorMessage }}
           </div>
         </div>

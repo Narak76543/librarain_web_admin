@@ -8,12 +8,14 @@ export const useBooks = () => {
     maxPrice   = '',
     limit      = 10,
     offset     = 0,
+    status     = '',
   } = {}) => {
     const params = new URLSearchParams()
     if (search)   params.append('search',    search)
     if (category) params.append('category',  category)
     if (minPrice) params.append('min_price', minPrice)
     if (maxPrice) params.append('max_price', maxPrice)
+    if (status)   params.append('status',    status)
     params.append('limit',  limit)
     params.append('offset', offset)
 

@@ -1,6 +1,6 @@
 export const useApi = () => {
-  // const baseUrl = 'http://192.168.0.198:8000'
-  const baseUrl = 'https://librarain-backend-copy-production.up.railway.app'
+  const baseUrl = 'http://localhost:8000'
+  // const baseUrl = 'https://librarain-backend-copy-production.up.railway.app'
 
   const getToken = () => {
     if (process.client) return localStorage.getItem('access_token')
@@ -148,5 +148,5 @@ export const useApi = () => {
     })
   }
 
-  return { get, getFile, post, put, patch, postForm, del }
+  return { get, getFile, post, put, patch, postForm, del, baseUrl }
 }

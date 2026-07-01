@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between">
+  <div class="bg-card p-4 rounded border border-border flex flex-col justify-between">
     <div class="flex justify-between items-start mb-4">
       <div 
-        class="w-10 h-10 rounded-lg flex items-center justify-center"
+        class="w-10 h-10 rounded flex items-center justify-center"
         :class="colorClasses.bg"
       >
         <component :is="iconComponent" class="w-5 h-5" :class="colorClasses.text" />
@@ -18,8 +18,8 @@
     </div>
     
     <div>
-      <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">{{ title }}</h3>
-      <p class="text-2xl font-bold text-gray-900">{{ value }}</p>
+      <h3 class="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1">{{ title }}</h3>
+      <p class="text-2xl font-bold text-text-primary">{{ value }}</p>
     </div>
   </div>
 </template>
@@ -49,23 +49,16 @@ const PlusIcon = icons.Plus
 const MinusIcon = icons.Minus
 
 const colorClasses = computed(() => {
-  const map = {
-    green: { bg: 'bg-emerald-100', text: 'text-emerald-600' },
-    red: { bg: 'bg-rose-100', text: 'text-rose-600' },
-    blue: { bg: 'bg-blue-100', text: 'text-blue-600' },
-    purple: { bg: 'bg-purple-100', text: 'text-purple-600' },
-    indigo: { bg: 'bg-indigo-100', text: 'text-indigo-600' }
-  }
-  return map[props.color] || map.blue
+  return { bg: 'bg-card border border-border', text: 'text-text-primary' }
 })
 
 const trendClasses = computed(() => {
   if (props.trend === 'New' || (!props.trend?.includes('-') && props.trend !== '0%')) {
-    return { bg: 'bg-emerald-50', text: 'text-emerald-600' }
+    return { bg: 'bg-emerald-50 dark:bg-emerald-500/10', text: 'text-emerald-600 dark:text-emerald-400' }
   } else if (props.trend === '0%') {
-    return { bg: 'bg-gray-100', text: 'text-gray-600' }
+    return { bg: 'bg-gray-100 dark:bg-gray-800', text: 'text-gray-600 dark:text-text-secondary' }
   } else {
-    return { bg: 'bg-rose-50', text: 'text-rose-600' }
+    return { bg: 'bg-rose-50 dark:bg-rose-500/10', text: 'text-rose-600 dark:text-rose-400' }
   }
 })
 </script>

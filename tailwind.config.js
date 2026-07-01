@@ -8,6 +8,7 @@ module.exports = {
     "./app.vue",
     "./error.vue"
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -17,11 +18,11 @@ module.exports = {
         primary: '#3ECF8E',
         'primary-hover': '#24B47E',
         'primary-light': 'rgba(62, 207, 142, 0.1)',
-        surface: '#F8F9FA',
-        card: '#FFFFFF',
-        border: '#EBEBEB',
-        'text-primary': '#111827',
-        'text-secondary': '#6B7280',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        card: 'rgb(var(--color-card) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+        'text-primary': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
         error: '#EF4444',
         warning: '#F59E0B',
         info: '#3B82F6',

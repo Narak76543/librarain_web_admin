@@ -9,15 +9,14 @@
             </th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-border">
+        <tbody class="divide-y divide-border bg-card">
           <tr 
             v-for="(row, idx) in rows" 
             :key="idx" 
-            class="hover:bg-surface/50 transition-colors group cursor-pointer"
-            :class="{'bg-surface/20': idx % 2 === 1}"
+            class="hover:bg-surface transition-colors group cursor-pointer"
             @click="$emit('row-click', row)"
           >
-            <td v-for="col in columns" :key="col.key" class="px-6 py-4" :class="col.class">
+            <td v-for="col in columns" :key="col.key" class="px-4 py-2.5" :class="col.class">
               <slot :name="col.key" :row="row">
                 {{ row[col.key] }}
               </slot>
@@ -33,32 +32,32 @@
     </div>
     
     <!-- Pagination -->
-    <div v-if="total > 0" class="px-6 py-4 border-t border-border bg-card flex justify-between items-center text-sm">
-      <p class="text-text-secondary">Showing <span class="font-semibold text-text-primary">{{ (page - 1) * perPage + 1 }}</span> to <span class="font-semibold text-text-primary">{{ Math.min(page * perPage, total) }}</span> of <span class="font-semibold text-text-primary">{{ total }}</span> results</p>
+    <div v-if="total > 0" class="px-4 py-2.5 border-t border-border bg-card flex justify-between items-center text-sm">
+      <p class="text-text-secondary">Showing <span class="font-medium text-text-primary">{{ (page - 1) * perPage + 1 }}</span> to <span class="font-medium text-text-primary">{{ Math.min(page * perPage, total) }}</span> of <span class="font-medium text-text-primary">{{ total }}</span> results</p>
       
       <div class="flex gap-1">
         <button 
-          class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface"
+          class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface text-text-secondary transition-colors"
           :disabled="page === 1"
           @click="$emit('page-change', page - 1)"
         >
-          &lt;
+          &larr;
         </button>
         <button 
           v-for="p in totalPages" 
           :key="p"
-          class="w-8 h-8 rounded flex items-center justify-center text-sm font-medium transition-colors"
-          :class="p === page ? 'bg-primary text-white font-bold' : 'text-text-secondary hover:bg-surface border border-border'"
+          class="w-8 h-8 rounded flex items-center justify-center text-sm transition-colors border"
+          :class="p === page ? 'border-primary bg-primary text-white' : 'border-transparent text-text-secondary hover:bg-surface hover:border-border'"
           @click="$emit('page-change', p)"
         >
           {{ p }}
         </button>
         <button 
-          class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface"
+          class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface text-text-secondary transition-colors"
           :disabled="page === totalPages"
           @click="$emit('page-change', page + 1)"
         >
-          &gt;
+          &rarr;
         </button>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col lg:flex-row gap-6">
+  <div class="flex flex-col lg:flex-row gap-4">
     <!-- Left Column: Navigation -->
     <div class="lg:w-64 flex-shrink-0">
       <div class="card p-2 space-y-1">
@@ -20,9 +20,9 @@
     <div class="flex-1">
       <!-- General Settings -->
       <div v-if="activeSection === 'general'" class="card">
-        <h3 class="text-lg font-semibold text-text-primary mb-6">General Settings</h3>
-        <form class="space-y-6" @submit.prevent>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">General Settings</h3>
+        <form class="space-y-4" @submit.prevent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">App Name</label>
               <input type="text" class="w-full" value="Librarain" />
@@ -44,9 +44,9 @@
       
       <!-- Email/SMTP Settings -->
       <div v-if="activeSection === 'email'" class="card">
-        <h3 class="text-lg font-semibold text-text-primary mb-6">Email / SMTP Configuration</h3>
-        <form class="space-y-6" @submit.prevent>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">Email / SMTP Configuration</h3>
+        <form class="space-y-4" @submit.prevent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="md:col-span-2">
               <label class="block text-sm font-medium text-text-secondary mb-1">SMTP Server</label>
               <input type="text" class="w-full" value="smtp.gmail.com" />
@@ -79,9 +79,9 @@
       
       <!-- Cloudinary Settings -->
       <div v-if="activeSection === 'cloudinary'" class="card">
-        <h3 class="text-lg font-semibold text-text-primary mb-6">Cloudinary Storage</h3>
-        <form class="space-y-6" @submit.prevent>
-          <div class="grid grid-cols-1 gap-6">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">Cloudinary Storage</h3>
+        <form class="space-y-4" @submit.prevent>
+          <div class="grid grid-cols-1 gap-4">
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">Cloud Name</label>
               <input type="text" class="w-full" value="librarain-cloud" />
@@ -106,9 +106,9 @@
       
       <!-- Security Settings -->
       <div v-if="activeSection === 'security'" class="card">
-        <h3 class="text-lg font-semibold text-text-primary mb-6">Security & Authentication</h3>
-        <form class="space-y-6" @submit.prevent>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <h3 class="text-lg font-semibold text-text-primary mb-4">Security & Authentication</h3>
+        <form class="space-y-4" @submit.prevent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-text-secondary mb-1">Max Failed Login Attempts</label>
               <input type="number" class="w-full" value="5" />

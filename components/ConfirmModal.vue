@@ -2,7 +2,7 @@
   <div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
     <div class="card w-full max-w-md animate-in fade-in zoom-in duration-200">
       <h3 class="text-lg font-semibold text-text-primary mb-2">{{ title }}</h3>
-      <p class="text-text-secondary mb-6 text-sm">{{ message }}</p>
+      <p class="text-text-secondary mb-4 text-sm">{{ message }}</p>
       
       <div class="flex justify-end gap-3">
         <button 

@@ -1,6 +1,6 @@
 <template>
   <span 
-    class="px-2.5 py-1 rounded-full text-xs font-semibold inline-flex items-center"
+    class="px-2 py-0.5 rounded text-[11px] uppercase tracking-wide font-medium inline-flex items-center border"
     :class="badgeClass"
   >
     {{ displayStatus }}
@@ -27,17 +27,17 @@ const displayStatus = computed(() => {
 const badgeClass = computed(() => {
   const s = String(displayStatus.value).toLowerCase()
   if (s === 'completed' || s === 'delivered' || s === 'active') {
-    return 'bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm'
+    return 'bg-green-50/50 dark:bg-green-500/10 text-green-700 dark:text-green-400 border-green-200 dark:border-green-500/20'
   }
   if (s === 'processing') {
-    return 'bg-blue-50 text-blue-600 border border-blue-100 shadow-sm'
+    return 'bg-blue-50/50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-500/20'
   }
   if (s === 'pending') {
-    return 'bg-amber-50 text-amber-600 border border-amber-100 shadow-sm'
+    return 'bg-gray-50/50 dark:bg-gray-500/10 text-gray-600 dark:text-text-secondary border-gray-200 dark:border-gray-500/20'
   }
   if (s === 'cancelled' || s === 'error') {
-    return 'bg-red-50 text-red-600 border border-red-100 shadow-sm'
+    return 'bg-red-50/50 dark:bg-red-500/10 text-red-700 dark:text-red-400 border-red-200 dark:border-red-500/20'
   }
-  return 'bg-gray-50 text-gray-600 border border-gray-200 shadow-sm'
+  return 'bg-gray-50/50 dark:bg-gray-500/10 text-gray-600 dark:text-text-secondary border-gray-200 dark:border-gray-500/20'
 })
 </script>

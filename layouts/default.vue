@@ -14,10 +14,15 @@
 import { computed, onMounted } from 'vue'
 import { useRoute, navigateTo } from 'nuxt/app'
 
+import { useTheme } from '~/composables/useTheme'
+
 const route = useRoute()
 const isLoginPage = computed(() => route.path === '/login')
 
 onMounted(async () => {
+  const { initTheme } = useTheme()
+  initTheme()
+
   if (isLoginPage.value) return
   
   const { isLoggedIn, getMe } = useAuth()

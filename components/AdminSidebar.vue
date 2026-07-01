@@ -14,8 +14,8 @@
         class="h-[38px] rounded-md px-3 flex items-center gap-3 transition-colors text-[13px]"
         :class="[
           route.path === item.path 
-            ? 'bg-surface text-primary font-semibold' 
-            : 'text-text-secondary hover:text-text-primary hover:bg-surface font-medium'
+            ? 'bg-gray-100 dark:bg-gray-500/20 text-text-primary font-semibold border border-gray-200 dark:border-gray-500/20 shadow-sm' 
+            : 'text-text-secondary hover:text-text-primary hover:bg-gray-50 dark:hover:bg-gray-500/10 border border-transparent font-medium'
         ]"
       >
         <component :is="item.icon" class="w-5 h-5" />
@@ -47,7 +47,8 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Book, LayoutDashboard, Library, Tags, ShoppingCart, Users, Settings, LogOut, BarChart } from 'lucide-vue-next'
+import { Book, LayoutDashboard, Library, Tags, ShoppingCart, Users, Settings, LogOut, BarChart2, FileText, Activity } from 'lucide-vue-next'
+
 
 const route = useRoute()
 const router = useRouter()
@@ -92,10 +93,14 @@ const initials = computed(() => {
 const navItems = [
   { path: '/', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/inventory', label: 'Inventory', icon: Library },
+  { path: '/suppliers', label: 'Suppliers', icon: Tags },
+  { path: '/purchase-orders', label: 'Purchase Orders', icon: ShoppingCart },
   { path: '/orders', label: 'Orders', icon: ShoppingCart },
+  { path: '/invoices', label: 'Invoices', icon: FileText },
   { path: '/users', label: 'Users', icon: Users },
-  { path: '/reports', label: 'Report Center', icon: BarChart },
+  { path: '/reports', label: 'Reports', icon: BarChart2 },
   { path: '/settings', label: 'Settings', icon: Settings },
+  { path: '/logs', label: 'System Logs', icon: Activity },
 ]
 
 const handleLogout = async () => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 relative h-full">
+  <div class="space-y-4 relative h-full">
     <!-- Header & Filters -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
       <h2 class="text-xl font-semibold text-text-primary">User Management</h2>
@@ -35,7 +35,7 @@
           <thead class="bg-surface text-text-secondary text-xs font-semibold uppercase border-b border-border">
             <tr>
               <th class="px-6 py-3">Name</th>
-              <th class="px-6 py-3">Email</th>
+
               <th class="px-6 py-3">Phone</th>
               <th class="px-6 py-3">Role</th>
               <th class="px-6 py-3">Joined</th>
@@ -53,7 +53,7 @@
             
             <!-- Empty State -->
             <tr v-else-if="users.length === 0">
-              <td colspan="7" class="text-center py-16 text-gray-400">
+              <td colspan="7" class="text-center py-16 text-text-secondary">
                 No users found
               </td>
             </tr>
@@ -67,7 +67,7 @@
               class="hover:bg-surface/50 transition-colors group cursor-pointer"
               :class="{'bg-surface/20': idx % 2 === 1}"
             >
-              <td class="px-6 py-4">
+              <td class="px-4 py-2.5">
                 <div class="flex items-center gap-3">
                   <img
                     v-if="user.profile?.avatar_url"
@@ -89,40 +89,40 @@
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4">{{ user.email }}</td>
-              <td class="px-6 py-4">{{ user.phone || '—' }}</td>
-              <td class="px-6 py-4">
-                <span class="px-2 py-1 rounded text-xs font-semibold" :class="user.roles?.[0] === 'ADMIN' ? 'bg-purple-100 text-purple-700' : 'bg-surface text-text-secondary'">
+
+              <td class="px-4 py-2.5">{{ user.phone || '—' }}</td>
+              <td class="px-4 py-2.5">
+                <span class="px-2 py-0.5 rounded text-[11px] font-medium uppercase border" :class="user.roles?.[0] === 'ADMIN' ? 'border-purple-200 dark:border-purple-500/20 bg-purple-50/50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400' : 'border-gray-200 dark:border-gray-500/20 bg-gray-50/50 dark:bg-gray-500/10 text-gray-600 dark:text-text-secondary'">
                   {{ user.roles?.[0] || 'USER' }}
                 </span>
               </td>
-              <td class="px-6 py-4 text-text-secondary">
+              <td class="px-4 py-2.5 text-text-secondary">
                 {{ user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—' }}
               </td>
-              <td class="px-6 py-4" @click.stop>
+              <td class="px-4 py-2.5" @click.stop>
                 <div class="flex items-center gap-2">
                   <span
-                    class="px-2 py-1 rounded text-xs font-semibold"
-                    :class="isLockedUser(user) ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-text-secondary'"
+                    class="px-2 py-0.5 rounded text-[11px] font-medium uppercase border"
+                    :class="isLockedUser(user) ? 'border-yellow-200 dark:border-yellow-500/20 bg-yellow-50/50 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400' : 'border-gray-200 dark:border-gray-500/20 bg-gray-50/50 dark:bg-gray-500/10 text-gray-600 dark:text-text-secondary'"
                   >
                     {{ isLockedUser(user) ? 'True' : 'False' }}
                   </span>
                   <button
                     v-if="isLockedUser(user)"
                     @click="handleResetAttempt(user)"
-                    class="px-2.5 py-1 rounded border border-amber-200 text-amber-600 hover:bg-amber-50 text-xs font-medium transition-colors"
+                    class="px-2.5 py-1 rounded border border-amber-200 dark:border-amber-500/20 text-amber-600 hover:bg-amber-50 text-xs font-medium transition-colors"
                     title="Reset Login Attempts"
                   >
                     Reset
                   </button>
                 </div>
               </td>
-              <td class="px-6 py-4" @click.stop>
+              <td class="px-4 py-2.5" @click.stop>
                 <div class="flex items-center gap-2">
                   <button
                     @click="toggleStatus(user)"
-                    class="px-2 py-1 rounded text-xs font-semibold transition-colors"
-                    :class="user.is_active ? 'bg-primary-light text-primary hover:bg-primary-light/80' : 'bg-red-100 text-error hover:bg-red-200'"
+                    class="px-2 py-0.5 rounded text-[11px] font-medium uppercase border transition-colors"
+                    :class="user.is_active ? 'border-green-200 dark:border-green-500/20 dark:border-green-500/20 bg-green-50/50 dark:bg-green-500/10 dark:bg-green-500/10 text-green-700 dark:text-green-400 dark:text-green-400 hover:bg-green-50' : 'border-red-200 dark:border-red-500/20 dark:border-red-500/20 bg-red-50/50 dark:bg-red-500/10 dark:bg-red-500/10 text-red-700 dark:text-red-400 dark:text-red-400 hover:bg-red-50'"
                   >
                     {{ user.is_active ? 'Active' : 'Inactive' }}
                   </button>
@@ -134,12 +134,12 @@
       </div>
       
       <!-- Pagination -->
-      <div v-if="total > 0" class="px-6 py-4 border-t border-border bg-card flex justify-between items-center text-sm">
+      <div v-if="total > 0" class="px-4 py-2.5 border-t border-border bg-card flex justify-between items-center text-sm">
         <p class="text-text-secondary">Showing <span class="font-semibold text-text-primary">{{ (currentPage - 1) * perPage + 1 }}</span> to <span class="font-semibold text-text-primary">{{ Math.min(currentPage * perPage, total) }}</span> of <span class="font-semibold text-text-primary">{{ total }}</span> results</p>
         <div class="flex gap-1">
-          <button @click="currentPage--" :disabled="currentPage === 1" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface">&lt;</button>
-          <button class="w-8 h-8 rounded bg-primary text-white font-medium">{{ currentPage }}</button>
-          <button @click="currentPage++" :disabled="currentPage * perPage >= total" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-surface">&gt;</button>
+          <button @click="currentPage--" :disabled="currentPage === 1" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-gray-50 transition-colors text-text-secondary">&larr;</button>
+          <button class="w-8 h-8 rounded border border-gray-800 bg-gray-800 text-white font-medium text-sm">{{ currentPage }}</button>
+          <button @click="currentPage++" :disabled="currentPage * perPage >= total" class="w-8 h-8 rounded border border-border flex items-center justify-center disabled:opacity-50 hover:bg-gray-50 transition-colors text-text-secondary">&rarr;</button>
         </div>
       </div>
     </div>
@@ -150,7 +150,7 @@
       class="fixed top-0 right-0 h-full w-full max-w-md bg-card border-l border-border shadow-2xl z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto"
       :class="isPanelOpen ? 'translate-x-0' : 'translate-x-full'"
     >
-      <div class="p-6">
+      <div class="p-4">
         <div class="flex justify-between items-start mb-8">
           <h3 class="text-lg font-semibold text-text-primary">User Profile</h3>
           <button @click="isPanelOpen = false" class="text-text-secondary hover:text-text-primary">
@@ -162,8 +162,8 @@
           <Loader2 class="animate-spin h-8 w-8 text-primary"/>
         </div>
         
-        <div v-else-if="selectedUser" class="space-y-6">
-          <div class="flex flex-col items-center mb-6">
+        <div v-else-if="selectedUser" class="space-y-4">
+          <div class="flex flex-col items-center mb-4">
             <img v-if="selectedUser.profile?.avatar_url" :src="selectedUser.profile.avatar_url" class="w-24 h-24 rounded-full object-cover mb-3 shadow-sm border border-border" />
             <div v-else class="w-24 h-24 rounded-full bg-primary-light text-primary flex items-center justify-center text-3xl font-semibold mb-3">
               {{ selectedUser.full_name ? selectedUser.full_name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : '?' }}
@@ -176,10 +176,10 @@
             </h4>
             
             <div class="flex gap-2 mt-2">
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold" :class="selectedUser.roles?.[0] === 'ADMIN' ? 'bg-purple-100 text-purple-700' : 'bg-surface text-text-secondary'">
+              <span class="px-2 py-0.5 rounded text-[11px] font-medium uppercase border" :class="selectedUser.roles?.[0] === 'ADMIN' ? 'border-purple-200 dark:border-purple-500/20 dark:border-purple-500/20 bg-purple-50/50 dark:bg-purple-500/10 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 dark:text-purple-400' : 'border-gray-200 dark:border-gray-500/20 dark:border-gray-500/20 bg-gray-50/50 dark:bg-gray-500/10 dark:bg-gray-500/10 text-gray-600 dark:text-gray-400 dark:text-text-secondary'">
                 {{ selectedUser.roles?.[0] || 'USER' }}
               </span>
-              <span class="px-2 py-0.5 rounded text-[11px] font-semibold" :class="selectedUser.is_active ? 'bg-primary-light text-primary' : 'bg-red-100 text-error'">
+              <span class="px-2 py-0.5 rounded text-[11px] font-medium uppercase border" :class="selectedUser.is_active ? 'border-green-200 dark:border-green-500/20 dark:border-green-500/20 bg-green-50/50 dark:bg-green-500/10 dark:bg-green-500/10 text-green-700 dark:text-green-400 dark:text-green-400' : 'border-red-200 dark:border-red-500/20 dark:border-red-500/20 bg-red-50/50 dark:bg-red-500/10 dark:bg-red-500/10 text-red-700 dark:text-red-400 dark:text-red-400'">
                 {{ selectedUser.is_active ? 'Active' : 'Inactive' }}
               </span>
             </div>

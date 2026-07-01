@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <div class="flex items-center justify-between">
       <h2 class="text-lg font-semibold text-text-primary">Overview</h2>
       <div class="flex gap-2">
@@ -15,35 +15,35 @@
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-5 gap-4" v-if="summary">
-      <div class="card bg-card p-5 animate-fade-in-up" style="animation-delay: 0.1s">
+      <div class="card bg-card p-4 animate-fade-in-up" style="animation-delay: 0.1s">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-primary"></span>
           <p class="text-sm font-medium text-text-secondary">Total Books</p>
         </div>
         <p class="text-3xl font-semibold text-text-primary mt-3">{{ summary.total_books }}</p>
       </div>
-      <div class="card bg-card p-5 animate-fade-in-up" style="animation-delay: 0.2s">
+      <div class="card bg-card p-4 animate-fade-in-up" style="animation-delay: 0.2s">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-info"></span>
           <p class="text-sm font-medium text-text-secondary">Total Stock</p>
         </div>
         <p class="text-3xl font-semibold text-text-primary mt-3">{{ summary.total_stock }}</p>
       </div>
-      <div class="card bg-card p-5 animate-fade-in-up" style="animation-delay: 0.3s">
+      <div class="card bg-card p-4 animate-fade-in-up" style="animation-delay: 0.3s">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-error"></span>
           <p class="text-sm font-medium text-text-secondary">Total Cost</p>
         </div>
         <p class="text-3xl font-semibold text-text-primary mt-3">${{ summary.total_cost.toFixed(2) }}</p>
       </div>
-      <div class="card bg-card p-5 animate-fade-in-up" style="animation-delay: 0.4s">
+      <div class="card bg-card p-4 animate-fade-in-up" style="animation-delay: 0.4s">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-success"></span>
           <p class="text-sm font-medium text-text-secondary">Total Revenue</p>
         </div>
         <p class="text-3xl font-semibold text-text-primary mt-3">${{ summary.total_revenue.toFixed(2) }}</p>
       </div>
-      <div class="card bg-card p-5 animate-fade-in-up" style="animation-delay: 0.5s">
+      <div class="card bg-card p-4 animate-fade-in-up" style="animation-delay: 0.5s">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-warning"></span>
           <p class="text-sm font-medium text-text-secondary">Profit Margin</p>

@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <div class="flex items-center justify-between">
       <div class="relative">
         <Search class="w-4 h-4 text-text-secondary absolute left-3 top-1/2 -translate-y-1/2" />
@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div v-if="isLoading" v-for="index in 6" :key="`category-skeleton-${index}`" class="card">
         <div class="h-5 w-32 bg-gray-100 rounded animate-pulse mb-3"></div>
         <div class="h-4 w-20 bg-gray-100 rounded animate-pulse mb-12"></div>
@@ -46,10 +46,10 @@
             {{ cat.books_count || 0 }} Books
           </span>
           <div class="flex items-center gap-2">
-            <button @click="openModal(cat)" class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface text-text-secondary hover:text-info transition-colors">
+            <button @click="openModal(cat)" class="w-8 h-8 flex items-center justify-center rounded border border-border hover:bg-surface text-text-secondary hover:text-info transition-colors">
               <Edit2 class="w-4 h-4" />
             </button>
-            <button @click="confirmDelete(cat)" class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface text-text-secondary hover:text-error transition-colors">
+            <button @click="confirmDelete(cat)" class="w-8 h-8 flex items-center justify-center rounded border border-border hover:bg-surface text-text-secondary hover:text-error transition-colors">
               <Trash2 class="w-4 h-4" />
             </button>
           </div>
@@ -64,7 +64,7 @@
     <!-- Category Form Modal -->
     <div v-if="showFormModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div class="card w-full max-w-md animate-in fade-in zoom-in duration-200">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center justify-between mb-4">
           <h3 class="text-lg font-semibold text-text-primary">{{ isEditing ? 'Edit Category' : 'Add Category' }}</h3>
           <button @click="showFormModal = false" class="text-text-secondary hover:text-text-primary">
             <X class="w-5 h-5" />
@@ -88,7 +88,7 @@
               type="button"
               @click="form.is_active = !form.is_active"
               class="px-2.5 py-1 text-[11px] font-semibold rounded-full transition-colors border shadow-sm"
-              :class="form.is_active ? 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10' : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100'"
+              :class="form.is_active ? 'bg-primary/5 text-primary border-primary/20 hover:bg-primary/10' : 'bg-gray-50 text-text-secondary border-gray-200 dark:border-gray-500/20 hover:bg-gray-100'"
             >
               {{ form.is_active ? 'Active' : 'Inactive' }}
             </button>
